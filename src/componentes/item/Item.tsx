@@ -32,7 +32,7 @@ const Item = ({ imagem, titulo, categorias, nota, descricao }: ItemProps) => {
           </Classe>
         </TituloContainer>
         <Descricao tamanho={14}>{descricao}</Descricao>
-        <LinkBotao to="/item">Saiba mais</LinkBotao>
+        <LinkBotao to="/restaurante">Saiba mais</LinkBotao>
       </ItemInfo>
     </ItemContainer>
   )

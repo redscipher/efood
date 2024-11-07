@@ -1,15 +1,51 @@
 // importacoes
 import styled from 'styled-components'
+import { CORES } from '../../globais'
 // imagens
-import fundoHeroi from '../../ativos/imagens/fundo_heroi.png'
+
+// tipo
+type Props = {
+  imagem_url: string
+  espacamento: string
+  tipo: 'heroi' | 'restaurante'
+  tamanho: number
+}
+
+type PropsTitulo = {
+  peso: number
+}
 
 // estilos
-const HeroiContainer = styled.div`
-  background-image: url(${fundoHeroi});
+const HeroiContainer = styled.div<Props>`
+  position: relative;
+  /* imagem de fundo */
+  background-image: url(${(props) => props.imagem_url});
+  background-size: cover;
+  background-repeat: no-repeat;
   /* tamanho */
-  height: 384px;
+  height: ${(props) => props.tamanho + 'px'};
   /* espacamento */
-  padding: 0 416px;
+  padding: ${(props) => props.espacamento};
+  /* valida adicionar fundo escuro */
+  ${(props) =>
+    props.tipo === 'restaurante' &&
+    `
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    div {
+      position: relative;
+      z-index: 2;
+    }
+  `}
 
   .container {
     /* tamanho */
@@ -20,7 +56,7 @@ const HeroiContainer = styled.div`
     flex-direction: column;
     /* ---------------------------- */
     justify-content: space-between;
-    align-items: center;
+    align-items: ${(props) => (props.tipo === 'heroi' ? 'center' : 'start')};
   }
 
   /* == responsividades: tablet */
@@ -56,6 +92,17 @@ const Titulo = styled.h1`
   }
 `
 
+const SubTitulo = styled.h3<PropsTitulo>`
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: ${(props) => props.peso};
+  /* margens */
+  margin-top: 25px;
+  margin-bottom: 32px;
+  /* cor */
+  color: ${CORES.branco};
+`
+
 // exportacoes
 export default HeroiContainer
-export { Titulo }
+export { Titulo, SubTitulo }

@@ -2,6 +2,7 @@
 import { Route, Routes } from 'react-router-dom'
 // paginas
 import Home from './home/Home'
+import Restaurante from './restaurante/Restaurante'
 
 // componente
 const Rotas = () => {
@@ -9,6 +10,7 @@ const Rotas = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/restaurante" element={<Restaurante />} />
     </Routes>
   )
 }
