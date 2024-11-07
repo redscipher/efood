@@ -9,7 +9,7 @@ const HeroiContainer = styled.div`
   /* tamanho */
   height: 384px;
   /* espacamento */
-  padding: 0 408px;
+  padding: 0 416px;
 
   .container {
     /* tamanho */
@@ -26,20 +26,14 @@ const HeroiContainer = styled.div`
   /* == responsividades: tablet */
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     /* espacamento */
-    padding: 0 204px;
+    padding: 0 208px;
   }
 
   /* smartphones */
   @media screen and (max-width: 767px) {
     /* espacamento */
-    padding: 0 102px;
+    padding: 0 104px;
   }
-`
-const Imagem = styled.img`
-  width: 125px;
-  height: 57.5px;
-  /* margens */
-  margin-top: 64px;
 `
 
 const Titulo = styled.h1`
@@ -64,4 +58,4 @@ const Titulo = styled.h1`
 
 // exportacoes
 export default HeroiContainer
-export { Imagem, Titulo }
+export { Titulo }

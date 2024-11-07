@@ -1,10 +1,27 @@
 // importacoes
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 // constantes
 const CORES = {
   bege: '#FFF8F2',
-  vermelho_claro: '#E66767'
+  vermelho_claro: '#E66767',
+  bege_2: '#FFEBD9',
+  branco: '#FFFFFF'
+}
+
+// tipos
+type Props = {
+  tamanho: number
+  margem_topo: number
+  margem_baixo: number
+}
+
+type ItemProps = {
+  imagem: string
+  titulo: string
+  categorias: string[]
+  nota: number
+  descricao: string
 }
 
 // estilos
@@ -16,6 +33,8 @@ const CSSGlobal = createGlobalStyle`
     box-sizing: border-box;   // setta limite
     /* fonte */
     font-family: Roboto, sans-serif;
+    /* remove os pontos das listas */
+    list-style: none;
   }
 
   /* elementos */
@@ -33,6 +52,22 @@ const CSSGlobal = createGlobalStyle`
   }
 `
 
+const Descricao = styled.p<Omit<Props, 'margem_topo' | 'margem_baixo'>>`
+  font-size: ${(props) => props.tamanho + 'px'};
+  line-height: 22px;
+  font-weight: 400;
+  color: ${CORES.vermelho_claro};
+`
+
+const Imagem = styled.img<Omit<Props, 'tamanho'>>`
+  width: 125px;
+  height: 57.5px;
+  /* margens */
+  margin-top: ${(props) => props.margem_topo + 'px'};
+  margin-bottom: ${(props) => props.margem_baixo + 'px'};
+`
+
 // exportacoes
 export default CSSGlobal
-export { CORES }
+export { CORES, Descricao, Imagem }
+export type { ItemProps }
