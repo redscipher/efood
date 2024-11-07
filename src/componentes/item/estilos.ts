@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { CORES } from '../../globais'
+import { Link } from 'react-router-dom'
 
 const ItemContainer = styled.div`
   display: flex;
@@ -62,15 +63,24 @@ const ItemInfo = styled.div`
   border: 1px solid ${CORES.vermelho_claro};
 `
 
-const Botao = styled.button`
+const LinkBotao = styled(Link)`
   background-color: ${CORES.vermelho_claro};
   color: ${CORES.bege_2};
   line-height: 16px;
   padding: 4px 6px;
   border: none;
   height: 24px;
+  text-decoration: none;
 `
 
 // exportacao
 export default ItemContainer
-export { Categorias, Classe, TituloContainer, Titulo, Nota, ItemInfo, Botao }
+export {
+  Categorias,
+  Classe,
+  TituloContainer,
+  Titulo,
+  Nota,
+  ItemInfo,
+  LinkBotao
+}

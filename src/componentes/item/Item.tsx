@@ -8,7 +8,7 @@ import ItemContainer, {
   Nota,
   Titulo,
   TituloContainer,
-  Botao
+  LinkBotao
 } from './estilos'
 
 // componente
@@ -32,7 +32,7 @@ const Item = ({ imagem, titulo, categorias, nota, descricao }: ItemProps) => {
           </Classe>
         </TituloContainer>
         <Descricao tamanho={14}>{descricao}</Descricao>
-        <Botao type="button">Saiba mais</Botao>
+        <LinkBotao to="/item">Saiba mais</LinkBotao>
       </ItemInfo>
     </ItemContainer>
   )
