@@ -2,14 +2,16 @@ import styled from 'styled-components'
 import { CORES } from '../../globais'
 import { Link } from 'react-router-dom'
 
+// tipos
+type Props = {
+  tipo: 'heroi' | 'restaurante'
+}
+
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   /* posicao */
   position: relative;
-  /* tamanho */
-  width: 472px;
-  height: 400px;
 `
 
 const Categorias = styled.ul`
@@ -56,21 +58,40 @@ const Nota = styled(Titulo)`
   text-align: center;
 `
 
-const ItemInfo = styled.div`
+const ItemInfo = styled.div<Props>`
   padding: 8px;
   /* cor */
-  background-color: ${CORES.branco};
+  background-color: ${(props) =>
+    props.tipo === 'heroi' ? CORES.branco : CORES.vermelho_claro};
   border: 1px solid ${CORES.vermelho_claro};
+  /* validacao */
+  ${(props) =>
+    props.tipo === 'restaurante' &&
+    `
+      color: ${CORES.bege_2};
+  `}
 `
 
-const LinkBotao = styled(Link)`
-  background-color: ${CORES.vermelho_claro};
-  color: ${CORES.bege_2};
+const LinkBotao = styled(Link)<Props>`
   line-height: 16px;
   padding: 4px 6px;
   border: none;
   height: 24px;
   text-decoration: none;
+  /* validacao */
+  ${(props) =>
+    props.tipo === 'restaurante'
+      ? `
+    background-color: ${CORES.bege_2};
+    color: ${CORES.vermelho_claro};
+    width: 100%;
+    display: block;
+    text-align: center;
+  `
+      : `
+    background-color: ${CORES.vermelho_claro};
+    color: ${CORES.bege_2};
+  `}
 `
 
 // exportacao

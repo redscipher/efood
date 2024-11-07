@@ -14,14 +14,16 @@ type Props = {
   tamanho: number
   margem_topo: number
   margem_baixo: number
+  tipo?: 'heroi' | 'restaurante'
 }
 
 type ItemProps = {
   imagem: string
   titulo: string
-  categorias: string[]
-  nota: number
+  categorias?: string[]
+  nota?: number
   descricao: string
+  tipo: 'heroi' | 'restaurante'
 }
 
 // estilos
@@ -56,7 +58,8 @@ const Descricao = styled.p<Omit<Props, 'margem_topo' | 'margem_baixo'>>`
   font-size: ${(props) => props.tamanho + 'px'};
   line-height: 22px;
   font-weight: 400;
-  color: ${CORES.vermelho_claro};
+  color: ${(props) =>
+    props.tipo === 'heroi' ? CORES.vermelho_claro : CORES.bege_2};
 `
 
 const Imagem = styled.img<Omit<Props, 'tamanho'>>`

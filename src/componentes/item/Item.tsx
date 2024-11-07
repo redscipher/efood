@@ -12,27 +12,45 @@ import ItemContainer, {
 } from './estilos'
 
 // componente
-const Item = ({ imagem, titulo, categorias, nota, descricao }: ItemProps) => {
+const Item = ({
+  imagem,
+  titulo,
+  categorias,
+  nota,
+  descricao,
+  tipo
+}: ItemProps) => {
   // def retorno
   return (
     <ItemContainer>
       <img src={imagem} alt={titulo} />
       <Categorias>
         {/* loop p/ renderizar as categorias */}
-        {categorias.map((c, ind) => (
-          <li key={ind}>{c}</li>
-        ))}
+        {categorias !== undefined &&
+          categorias.map((c, ind) => <li key={ind}>{c}</li>)}
       </Categorias>
-      <ItemInfo>
+      <ItemInfo tipo={tipo}>
         <TituloContainer>
           <Titulo>{titulo}</Titulo>
-          <Classe>
-            <Nota as="p">{nota}</Nota>
-            <img src={estrela} alt="Classificação" />
-          </Classe>
+          {nota !== undefined && (
+            <Classe>
+              <Nota as="p">{nota}</Nota>
+              <img src={estrela} alt="Classificação" />
+            </Classe>
+          )}
         </TituloContainer>
-        <Descricao tamanho={14}>{descricao}</Descricao>
-        <LinkBotao to="/restaurante">Saiba mais</LinkBotao>
+        <Descricao tamanho={14} tipo={tipo}>
+          {descricao}
+        </Descricao>
+        {tipo === 'heroi' ? (
+          <LinkBotao to="/restaurante" tipo={tipo}>
+            Saiba mais
+          </LinkBotao>
+        ) : (
+          <LinkBotao to="/restaurante" tipo={tipo}>
+            Adicionar ao carrinho
+          </LinkBotao>
+        )}
       </ItemInfo>
     </ItemContainer>
   )

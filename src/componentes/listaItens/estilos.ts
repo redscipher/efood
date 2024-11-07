@@ -1,12 +1,19 @@
 // importacoes
 import styled from 'styled-components'
 
+// tipos
+type Props = {
+  colunas: string
+  colunaGap: string
+  gap: string
+}
+
 // estilos
-const ListaContainer = styled.div`
+const ListaContainer = styled.div<Props>`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 80px;
-  gap: 48px;
+  grid-template-columns: ${(props) => props.colunas};
+  column-gap: ${(props) => props.colunaGap};
+  gap: ${(props) => props.gap};
   /* margens */
   margin-top: 80px;
   margin-bottom: 120px;

@@ -29,7 +29,7 @@ const Rodape = () => {
             <img src={X} alt="Logo do X" />
           </li>
         </Lista>
-        <Descricao tamanho={10}>
+        <Descricao tamanho={10} tipo="heroi">
           A efood é uma plataforma para divulgação de estabelecimentos, a
           responsabilidade pela entrega, qualidade dos produtos é toda do
           estabelecimento contratado.
