@@ -7,7 +7,7 @@ type Props = {
   tipo: 'heroi' | 'restaurante'
 }
 
-const ItemContainer = styled.div`
+const ItemContainer = styled.div<Props>`
   display: flex;
   flex-direction: column;
   /* posicao */
@@ -21,6 +21,11 @@ const ItemContainer = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  ${(props) =>
+    props.tipo === 'restaurante'
+      ? `border: 8px solid ${CORES.vermelho_claro}`
+      : ''};
 `
 
 const Categorias = styled.ul`

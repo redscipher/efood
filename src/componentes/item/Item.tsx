@@ -22,7 +22,7 @@ const Item = ({
 }: ItemProps) => {
   // def retorno
   return (
-    <ItemContainer>
+    <ItemContainer tipo={tipo}>
       <img src={imagem} alt={titulo} />
       <Categorias>
         {/* loop p/ renderizar as categorias */}
