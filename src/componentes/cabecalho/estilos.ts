@@ -18,6 +18,23 @@ const CabContainer = styled.header`
     display: flex;
     justify-content: space-between;
   }
+
+  /* == responsividades: tablet */
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    /* espacamento */
+    padding: 63px 40px;
+  }
+
+  /* smartphones */
+  @media screen and (max-width: 767px) {
+    /* espacamento */
+    padding: 15px 42px;
+
+    .container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 `
 
 const LinkMarca = styled(Link)`
@@ -27,6 +44,11 @@ const LinkMarca = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   margin-top: 19px;
+
+  /* smartphones */
+  @media screen and (max-width: 767px) {
+    margin-bottom: 19px;
+  }
 `
 
 // exportacoes

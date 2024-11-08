@@ -1,7 +1,7 @@
 // importacoes
 import { ItemProps } from '../../globais'
 import Item from '../item/Item'
-import ListaContainer from './estilos'
+import ListaContainer, { Caixa } from './estilos'
 
 // tipo
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 const ListaItens = ({ itens, colunas, colunaGap, gap }: Props) => {
   // def retorno
   return (
-    <div className="container">
+    <Caixa className="container">
       <ListaContainer colunas={colunas} colunaGap={colunaGap} gap={gap}>
         {/* loop / renderizar os itens */}
         {itens.map((i, ind) => {
@@ -33,7 +33,7 @@ const ListaItens = ({ itens, colunas, colunaGap, gap }: Props) => {
           )
         })}
       </ListaContainer>
-    </div>
+    </Caixa>
   )
 }
 

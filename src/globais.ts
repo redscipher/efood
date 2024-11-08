@@ -52,6 +52,20 @@ const CSSGlobal = createGlobalStyle`
     max-width: 1024px;
     width: 100%;
   }
+
+   /* == responsividades: tablet */
+   @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .container {
+      max-width: 900px;
+    }
+  }
+
+  /* smartphones */
+  @media screen and (max-width: 767px) {
+    .container {
+      max-width: 700px;
+    }
+  }
 `
 
 const Descricao = styled.p<Omit<Props, 'margem_topo' | 'margem_baixo'>>`

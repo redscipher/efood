@@ -26,6 +26,7 @@ const HeroiContainer = styled.div<Props>`
   height: ${(props) => props.tamanho + 'px'};
   /* espacamento */
   padding: ${(props) => props.espacamento};
+
   /* valida adicionar fundo escuro */
   ${(props) =>
     props.tipo === 'restaurante' &&
@@ -101,6 +102,12 @@ const SubTitulo = styled.h3<PropsTitulo>`
   margin-bottom: 32px;
   /* cor */
   color: ${CORES.branco};
+
+  /* smartphones */
+  @media screen and (max-width: 767px) {
+    font-size: 16px;
+    text-align: center;
+  }
 `
 
 // exportacoes

@@ -9,6 +9,9 @@ const RodaContainer = styled.footer`
   height: 298px;
   /* espacamento */
   padding: 0 444px;
+  /* tamanho */
+  width: 100%;
+  height: 100%;
 
   /* classes */
   .container {
@@ -17,6 +20,18 @@ const RodaContainer = styled.footer`
     justify-content: center;
     align-items: center;
     text-align: center;
+  }
+
+  /* == responsividades: tablet */
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    /* espacamento */
+    padding: 0 222px;
+  }
+
+  /* smartphones */
+  @media screen and (max-width: 767px) {
+    /* espacamento */
+    padding: 0 111px;
   }
 `
 

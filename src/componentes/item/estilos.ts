@@ -12,6 +12,15 @@ const ItemContainer = styled.div`
   flex-direction: column;
   /* posicao */
   position: relative;
+  /* tamanho */
+  width: 100%;
+  height: 100%;
+
+  /* imagens */
+  > img {
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const Categorias = styled.ul`
