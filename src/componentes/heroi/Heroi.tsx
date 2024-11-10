@@ -9,10 +9,19 @@ type Props = {
   tipo: 'heroi' | 'restaurante'
   espacamento: string
   tamanho: number
+  titulo: string
+  subtitulo: string
 }
 
 // componente
-const Heroi = ({ imagem_url, tipo, espacamento, tamanho }: Props) => {
+const Heroi = ({
+  imagem_url,
+  tipo,
+  espacamento,
+  tamanho,
+  titulo,
+  subtitulo
+}: Props) => {
   // def retorno
   return (
     <HeroiContainer
@@ -37,8 +46,8 @@ const Heroi = ({ imagem_url, tipo, espacamento, tamanho }: Props) => {
           </>
         ) : (
           <>
-            <SubTitulo peso={100}>Italiana</SubTitulo>
-            <SubTitulo peso={900}>La Dolce Vita Trattoria</SubTitulo>
+            <SubTitulo peso={100}>{titulo}</SubTitulo>
+            <SubTitulo peso={900}>{subtitulo}</SubTitulo>
           </>
         )}
       </div>

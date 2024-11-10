@@ -20,7 +20,8 @@ const Item = ({
   descricao,
   tipo,
   exibirModal,
-  preco
+  preco,
+  id
 }: ItemProps) => {
   // funcoes
   const confirmaExibirModal = () => {
@@ -33,6 +34,15 @@ const Item = ({
         tipo: 'heroi'
       })
     }
+  }
+
+  const getDescricao = (descricao: string) => {
+    if (descricao.length > 100 && tipo === 'restaurante') {
+      return descricao.slice(0, 97) + '...'
+    } else if (descricao.length > 250 && tipo === 'heroi') {
+      return descricao.slice(0, 247) + '...'
+    }
+    return descricao
   }
 
   // def retorno
@@ -55,10 +65,10 @@ const Item = ({
           )}
         </TituloContainer>
         <Descricao tamanho={14} tipo={tipo}>
-          {descricao}
+          {getDescricao(descricao)}
         </Descricao>
         {tipo === 'heroi' ? (
-          <LinkBotao to="/restaurante">Saiba mais</LinkBotao>
+          <LinkBotao to={`/restaurante/${id}`}>Saiba mais</LinkBotao>
         ) : (
           <Botao type="button" onClick={confirmaExibirModal}>
             Adicionar ao carrinho

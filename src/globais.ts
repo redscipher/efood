@@ -26,6 +26,27 @@ type ItemProps = {
   tipo: 'heroi' | 'restaurante'
   exibirModal?: (item: ItemProps) => void
   preco?: number
+  id?: number
+}
+
+type ItemCardapio = {
+  foto: string
+  preco: number
+  id: number
+  nome: string
+  descricao: string
+  porcao: string
+}
+
+type ItemRestaurante = {
+  id: number
+  titulo: string
+  destacado: boolean
+  tipoItem: string[]
+  avaliacao: number
+  descricao: string
+  capa: string
+  cardapio: ItemCardapio[]
 }
 
 // estilos
@@ -76,6 +97,9 @@ const Descricao = styled.p<Omit<Props, 'margem_topo' | 'margem_baixo'>>`
   font-weight: 400;
   color: ${(props) =>
     props.tipo === 'heroi' ? CORES.vermelho_claro : CORES.bege_2};
+  /* tamanho */
+  max-width: ${(props) => (props.tipo === 'heroi' ? '456px' : '304px')};
+  max-height: 88px;
 `
 
 const Imagem = styled.img<Omit<Props, 'tamanho'>>`
@@ -102,4 +126,4 @@ const Botao = styled.button`
 // exportacoes
 export default CSSGlobal
 export { CORES, Descricao, Imagem, Botao }
-export type { ItemProps }
+export type { ItemProps, ItemRestaurante, ItemCardapio }

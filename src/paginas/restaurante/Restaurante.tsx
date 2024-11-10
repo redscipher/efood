@@ -1,59 +1,36 @@
 // importacoes
 import ListaItens from '../../componentes/listaItens/ListaItens'
-import { ItemProps } from '../../globais'
+import { ItemRestaurante } from '../../globais'
 // imagens
-import prato1 from '../../ativos/imagens/cardapio/prato1.png'
 import Heroi from '../../componentes/heroi/Heroi'
 import Cabecalho from '../../componentes/cabecalho'
 import HeroiFundo from '../../ativos/imagens/restaurantes/restaurante2.png'
-
-const pratos: ItemProps[] = [
-  {
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    imagem: prato1,
-    titulo: 'Pizza Marguerita',
-    tipo: 'restaurante'
-  },
-  {
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    imagem: prato1,
-    titulo: 'Pizza Marguerita',
-    tipo: 'restaurante'
-  },
-  {
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    imagem: prato1,
-    titulo: 'Pizza Marguerita',
-    tipo: 'restaurante'
-  },
-  {
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    imagem: prato1,
-    titulo: 'Pizza Marguerita',
-    tipo: 'restaurante'
-  },
-  {
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    imagem: prato1,
-    titulo: 'Pizza Marguerita',
-    tipo: 'restaurante'
-  },
-  {
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    imagem: prato1,
-    titulo: 'Pizza Marguerita',
-    tipo: 'restaurante'
-  }
-]
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 // componente
 const Restaurante = () => {
+  // parametros da URL
+  const { id } = useParams()
+  // estados
+  const [lstCardapio, setLstCardapio] = useState<ItemRestaurante>({
+    avaliacao: 0,
+    capa: '',
+    cardapio: [],
+    descricao: '',
+    destacado: false,
+    id: 0,
+    tipoItem: [],
+    titulo: ''
+  })
+
+  // efeitos
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+      .then((res) => res.json())
+      .then((res) => setLstCardapio(res))
+  }, [id])
+
   // def retorno
   return (
     <>
@@ -63,12 +40,16 @@ const Restaurante = () => {
         tipo="restaurante"
         espacamento="0 171px"
         tamanho={280}
+        titulo={lstCardapio.titulo}
+        subtitulo={lstCardapio.titulo}
       />
       <ListaItens
-        itens={pratos}
+        itens={lstCardapio}
         colunas={'1fr 1fr 1fr'}
-        colunaGap={'32px'}
+        colunagap={'32px'}
         gap={'32px'}
+        tipo="restaurante"
+        id={id as unknown as number}
       />
     </>
   )

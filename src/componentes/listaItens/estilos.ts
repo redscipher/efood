@@ -5,7 +5,7 @@ import { CORES } from '../../globais'
 // tipos
 type Props = {
   colunas: string
-  colunaGap: string
+  colunagap: string
   gap: string
 }
 
@@ -13,7 +13,7 @@ type Props = {
 const ListaContainer = styled.div<Props>`
   display: grid;
   grid-template-columns: ${(props) => props.colunas};
-  column-gap: ${(props) => props.colunaGap};
+  column-gap: ${(props) => props.colunagap};
   gap: ${(props) => props.gap};
   /* margens */
   margin-top: 80px;

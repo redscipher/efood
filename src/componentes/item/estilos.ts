@@ -13,13 +13,14 @@ const ItemContainer = styled.div<Props>`
   /* posicao */
   position: relative;
   /* tamanho */
-  width: 100%;
-  height: 100%;
+  width: ${(props) => (props.tipo === 'heroi' ? '472px' : '320px')};
+  height: ${(props) => (props.tipo === 'heroi' ? '398px' : '338px')};
 
   /* imagens */
   > img {
-    width: 100%;
-    height: 100%;
+    width: ${(props) => (props.tipo === 'heroi' ? '472px' : '304px')};
+    height: ${(props) => (props.tipo === 'heroi' ? '217px' : '167px')};
+    object-fit: cover;
   }
 
   ${(props) =>

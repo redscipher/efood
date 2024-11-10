@@ -1,6 +1,6 @@
 // importacoes
 import { useState } from 'react'
-import { Botao, ItemProps } from '../../globais'
+import { Botao, ItemProps, ItemRestaurante } from '../../globais'
 import Item from '../item/Item'
 import ListaContainer, { Caixa, Modal, ModalContainer } from './estilos'
 // imagens
@@ -8,14 +8,16 @@ import fechar from '../../ativos/imagens/fechar.png'
 
 // tipo
 type Props = {
-  itens: ItemProps[]
+  itens: ItemRestaurante[] | ItemRestaurante
   colunas: string
-  colunaGap: string
+  colunagap: string
   gap: string
+  tipo: 'heroi' | 'restaurante'
+  id?: number
 }
 
 // componente
-const ListaItens = ({ itens, colunas, colunaGap, gap }: Props) => {
+const ListaItens = ({ itens, colunas, colunagap, gap, tipo, id }: Props) => {
   // estados
   const [itemSel, setItemSel] = useState<ItemProps>()
 
@@ -25,7 +27,7 @@ const ListaItens = ({ itens, colunas, colunaGap, gap }: Props) => {
       imagem: '',
       preco: 0,
       titulo: '',
-      tipo: 'heroi',
+      tipo: tipo,
       categorias: []
     })
   }
@@ -33,23 +35,40 @@ const ListaItens = ({ itens, colunas, colunaGap, gap }: Props) => {
   // def retorno
   return (
     <Caixa className="container">
-      <ListaContainer colunas={colunas} colunaGap={colunaGap} gap={gap}>
+      <ListaContainer colunas={colunas} colunagap={colunagap} gap={gap}>
         {/* loop / renderizar os itens */}
-        {itens.map((i, ind) => {
-          // def retorno
-          return (
-            <Item
-              key={ind}
-              imagem={i.imagem}
-              titulo={i.titulo}
-              categorias={i.categorias}
-              nota={i.nota}
-              descricao={i.descricao}
-              tipo={i.tipo}
-              exibirModal={setItemSel}
-            ></Item>
-          )
-        })}
+        {Array.isArray(itens)
+          ? itens.map((i, ind) => {
+              // def retorno
+              return (
+                <Item
+                  key={ind}
+                  id={i.id}
+                  imagem={i.capa}
+                  titulo={i.titulo}
+                  categorias={i.tipoItem}
+                  nota={i.avaliacao}
+                  descricao={i.descricao}
+                  tipo={tipo}
+                  exibirModal={setItemSel}
+                ></Item>
+              )
+            })
+          : itens.cardapio.map((j, indCard) => {
+              return (
+                <Item
+                  key={indCard}
+                  id={j.id}
+                  imagem={j.foto}
+                  titulo={j.nome}
+                  categorias={[j.porcao]}
+                  descricao={j.descricao}
+                  tipo={tipo}
+                  preco={j.preco}
+                  exibirModal={setItemSel}
+                ></Item>
+              )
+            })}
       </ListaContainer>
       {/* modal */}
       <Modal className={`modal ${itemSel?.titulo ? 'visivel' : ''}`}>
