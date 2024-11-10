@@ -26,6 +26,7 @@ const HeroiContainer = styled.div<Props>`
   height: ${(props) => props.tamanho + 'px'};
   /* espacamento */
   padding: ${(props) => props.espacamento};
+  z-index: 0;
 
   /* valida adicionar fundo escuro */
   ${(props) =>

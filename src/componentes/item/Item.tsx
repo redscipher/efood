@@ -1,6 +1,6 @@
 // importacoes
 import estrela from '../../ativos/imagens/estrela.png'
-import { Descricao, ItemProps } from '../../globais'
+import { Botao, Descricao, ItemProps } from '../../globais'
 import ItemContainer, {
   Categorias,
   Classe,
@@ -18,8 +18,23 @@ const Item = ({
   categorias,
   nota,
   descricao,
-  tipo
+  tipo,
+  exibirModal,
+  preco
 }: ItemProps) => {
+  // funcoes
+  const confirmaExibirModal = () => {
+    if (exibirModal) {
+      exibirModal({
+        descricao,
+        imagem,
+        preco: preco ?? 0,
+        titulo,
+        tipo: 'heroi'
+      })
+    }
+  }
+
   // def retorno
   return (
     <ItemContainer tipo={tipo}>
@@ -43,13 +58,11 @@ const Item = ({
           {descricao}
         </Descricao>
         {tipo === 'heroi' ? (
-          <LinkBotao to="/restaurante" tipo={tipo}>
-            Saiba mais
-          </LinkBotao>
+          <LinkBotao to="/restaurante">Saiba mais</LinkBotao>
         ) : (
-          <LinkBotao to="/restaurante" tipo={tipo}>
+          <Botao type="button" onClick={confirmaExibirModal}>
             Adicionar ao carrinho
-          </LinkBotao>
+          </Botao>
         )}
       </ItemInfo>
     </ItemContainer>

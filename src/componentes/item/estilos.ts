@@ -86,26 +86,14 @@ const ItemInfo = styled.div<Props>`
   `}
 `
 
-const LinkBotao = styled(Link)<Props>`
+const LinkBotao = styled(Link)`
   line-height: 16px;
   padding: 4px 6px;
   border: none;
   height: 24px;
   text-decoration: none;
-  /* validacao */
-  ${(props) =>
-    props.tipo === 'restaurante'
-      ? `
-    background-color: ${CORES.bege_2};
-    color: ${CORES.vermelho_claro};
-    width: 100%;
-    display: block;
-    text-align: center;
-  `
-      : `
-    background-color: ${CORES.vermelho_claro};
-    color: ${CORES.bege_2};
-  `}
+  background-color: ${CORES.vermelho_claro};
+  color: ${CORES.bege_2};
 `
 
 // exportacao

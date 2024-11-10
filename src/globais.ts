@@ -24,6 +24,8 @@ type ItemProps = {
   nota?: number
   descricao: string
   tipo: 'heroi' | 'restaurante'
+  exibirModal?: (item: ItemProps) => void
+  preco?: number
 }
 
 // estilos
@@ -84,7 +86,20 @@ const Imagem = styled.img<Omit<Props, 'tamanho'>>`
   margin-bottom: ${(props) => props.margem_baixo + 'px'};
 `
 
+const Botao = styled.button`
+  line-height: 16px;
+  padding: 4px 6px;
+  border: none;
+  height: 24px;
+  text-decoration: none;
+  background-color: ${CORES.bege_2};
+  color: ${CORES.vermelho_claro};
+  width: 100%;
+  display: block;
+  text-align: center;
+`
+
 // exportacoes
 export default CSSGlobal
-export { CORES, Descricao, Imagem }
+export { CORES, Descricao, Imagem, Botao }
 export type { ItemProps }

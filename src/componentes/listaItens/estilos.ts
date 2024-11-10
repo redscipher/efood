@@ -1,5 +1,6 @@
 // importacoes
 import styled from 'styled-components'
+import { CORES } from '../../globais'
 
 // tipos
 type Props = {
@@ -38,8 +39,99 @@ const ListaContainer = styled.div<Props>`
 const Caixa = styled.div`
   display: flex;
   justify-content: center;
+  /* tamanho */
+  max-width: 1024px;
+  width: 100%;
+  /* posicao */
+  position: relative;
+  z-index: 1;
+`
+
+const Modal = styled.div`
+  /* tamanho maximo */
+  width: 100%;
+  height: 100%;
+  display: none;
+
+  &.visivel {
+    display: flex;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 0;
+  }
+
+  > div {
+    max-width: 1024px;
+    width: 100%;
+    max-height: 344px;
+    height: 100%;
+  }
+`
+
+const ModalContainer = styled.div`
+  display: flex;
+  /* tamanho */
+  width: 100%;
+  height: 100%;
+  /* espcamento */
+  padding: 32px;
+  /* cores */
+  background-color: ${CORES.vermelho_claro};
+  color: ${CORES.branco};
+  position: relative;
+
+  > img {
+    margin-right: 24px;
+    /* tamanho */
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+  }
+
+  > button {
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    border: none;
+    color: ${CORES.branco};
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: 18px;
+      line-height: 21px;
+    }
+
+    p {
+      max-width: 656px;
+    }
+
+    button {
+      width: 218px;
+      height: 24px;
+      margin-bottom: 27px;
+      font-size: 14px;
+      line-height: 16px;
+    }
+  }
 `
 
 // exportacoes
 export default ListaContainer
-export { Caixa }
+export { Caixa, Modal, ModalContainer }
