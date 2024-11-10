@@ -13,11 +13,10 @@ type Props = {
   colunagap: string
   gap: string
   tipo: 'heroi' | 'restaurante'
-  id?: number
 }
 
 // componente
-const ListaItens = ({ itens, colunas, colunagap, gap, tipo, id }: Props) => {
+const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
   // estados
   const [itemSel, setItemSel] = useState<ItemProps>()
 

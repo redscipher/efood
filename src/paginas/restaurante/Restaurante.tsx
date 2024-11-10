@@ -49,7 +49,6 @@ const Restaurante = () => {
         colunagap={'32px'}
         gap={'32px'}
         tipo="restaurante"
-        id={id as unknown as number}
       />
     </>
   )
