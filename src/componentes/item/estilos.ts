@@ -13,8 +13,8 @@ const ItemContainer = styled.div<Props>`
   /* posicao */
   position: relative;
   /* tamanho */
-  width: ${(props) => (props.tipo === 'heroi' ? '472px' : '320px')};
-  height: ${(props) => (props.tipo === 'heroi' ? '398px' : '338px')};
+  width: 100%;
+  height: 100%;
 
   /* imagens */
   > img {

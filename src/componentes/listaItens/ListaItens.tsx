@@ -77,7 +77,12 @@ const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
               <img src={itemSel?.imagem} alt={itemSel?.titulo} />
               <div>
                 <h1 className="modal-title fs-5">{itemSel?.titulo}</h1>
-                <p>{itemSel?.descricao}</p>
+                <p>
+                  {itemSel?.descricao} <br /> <br />
+                  {itemSel?.categorias?.join('') !== undefined && (
+                    <>Serve: {itemSel?.categorias?.join('')}</>
+                  )}
+                </p>
                 <Botao type="button" onClick={fechaModal}>
                   Adicionar ao carrinho - R$ {itemSel?.preco}
                 </Botao>

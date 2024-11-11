@@ -98,7 +98,7 @@ const Descricao = styled.p<Omit<Props, 'margem_topo' | 'margem_baixo'>>`
   color: ${(props) =>
     props.tipo === 'heroi' ? CORES.vermelho_claro : CORES.bege_2};
   /* tamanho */
-  max-width: ${(props) => (props.tipo === 'heroi' ? '456px' : '304px')};
+  max-width: 456px;
   max-height: 88px;
 `
 
