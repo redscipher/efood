@@ -35,39 +35,44 @@ const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
   return (
     <Caixa className="container">
       <ListaContainer colunas={colunas} colunagap={colunagap} gap={gap}>
-        {/* loop / renderizar os itens */}
-        {Array.isArray(itens)
-          ? itens.map((i, ind) => {
-              // def retorno
-              return (
-                <Item
-                  key={ind}
-                  id={i.id}
-                  imagem={i.capa}
-                  titulo={i.titulo}
-                  categorias={i.tipoItem}
-                  nota={i.avaliacao}
-                  descricao={i.descricao}
-                  tipo={tipo}
-                  exibirModal={setItemSel}
-                ></Item>
-              )
-            })
-          : itens.cardapio.map((j, indCard) => {
-              return (
-                <Item
-                  key={indCard}
-                  id={j.id}
-                  imagem={j.foto}
-                  titulo={j.nome}
-                  categorias={[j.porcao]}
-                  descricao={j.descricao}
-                  tipo={tipo}
-                  preco={j.preco}
-                  exibirModal={setItemSel}
-                ></Item>
-              )
-            })}
+        {itens === undefined ||
+        (!Array.isArray(itens) && itens.cardapio.length === 0) ||
+        (Array.isArray(itens) && itens.length === 0) ? (
+          <h3>Carregando...</h3>
+        ) : Array.isArray(itens) ? (
+          itens.map((i, ind) => {
+            // def retorno
+            return (
+              <Item
+                key={ind}
+                id={i.id}
+                imagem={i.capa}
+                titulo={i.titulo}
+                categorias={i.tipoItem}
+                nota={i.avaliacao}
+                descricao={i.descricao}
+                tipo={tipo}
+                exibirModal={setItemSel}
+              ></Item>
+            )
+          })
+        ) : (
+          itens.cardapio.map((j, indCard) => {
+            return (
+              <Item
+                key={indCard}
+                id={j.id}
+                imagem={j.foto}
+                titulo={j.nome}
+                categorias={[j.porcao]}
+                descricao={j.descricao}
+                tipo={tipo}
+                preco={j.preco}
+                exibirModal={setItemSel}
+              ></Item>
+            )
+          })
+        )}
       </ListaContainer>
       {/* modal */}
       <Modal className={`modal ${itemSel?.titulo ? 'visivel' : ''}`}>
