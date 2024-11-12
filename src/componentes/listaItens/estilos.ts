@@ -1,6 +1,6 @@
 // importacoes
 import styled from 'styled-components'
-import { CORES } from '../../globais'
+import { Botao, CORES } from '../../globais'
 
 // tipos
 type Props = {
@@ -128,6 +128,22 @@ const ModalContainer = styled.div`
       margin-bottom: 27px;
       font-size: 14px;
       line-height: 16px;
+    }
+  }
+
+  /* smartphones */
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+
+    img {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 16px;
+      object-fit: cover;
+    }
+
+    ${Botao} {
+      width: 100%;
     }
   }
 `
