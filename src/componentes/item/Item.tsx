@@ -31,7 +31,8 @@ const Item = ({
         imagem,
         preco: preco ?? 0,
         titulo,
-        tipo: 'heroi'
+        tipo: 'heroi',
+        categorias
       })
     }
   }
