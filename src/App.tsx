@@ -1,24 +1,25 @@
 // importacoes
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-// bootstrap
-// import 'bootstrap/dist/css/bootstrap.min.css'
-// import 'bootstrap-icons/font/bootstrap-icons.min.css'
 // --------------------------------
 import CSSGlobal from './globais'
 import Rotas from './paginas/rotas'
 import Rodape from './componentes/rodape'
+import armazem from './armazem'
 
 // componente pai principal
 function App() {
   // def retorno
   return (
     // componente p/ navegacao entre as rotas de paginas
-    <BrowserRouter>
-      <CSSGlobal />
-      {/* componente com as paginas */}
-      <Rotas />
-      <Rodape />
-    </BrowserRouter>
+    <Provider store={armazem}>
+      <BrowserRouter>
+        <CSSGlobal />
+        {/* componente com as paginas */}
+        <Rotas />
+        <Rodape />
+      </BrowserRouter>
+    </Provider>
   )
 }
 
