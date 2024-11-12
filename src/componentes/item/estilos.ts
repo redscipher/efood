@@ -27,6 +27,14 @@ const ItemContainer = styled.div<Props>`
     props.tipo === 'restaurante'
       ? `border: 8px solid ${CORES.vermelho_claro}`
       : ''};
+
+  /* == responsividades: tablet - smartphones */
+  @media screen and (max-width: 1023px) {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 `
 
 const Categorias = styled.ul`
