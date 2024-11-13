@@ -39,9 +39,10 @@ const CarrinhoContainer = styled.aside`
   /* smartphones */
   @media screen and (max-width: 767px) {
     max-width: 80vw;
+    width: 100%;
 
     ${Botao} {
-      width: 90%;
+      width: 95%;
       font-size: 12px;
     }
   }
@@ -79,6 +80,11 @@ const CarrinhoOpaco = styled.div`
   height: 100%;
   background-color: ${CORES.preto};
   opacity: 0.8;
+
+  /* smartphones */
+  @media screen and (max-width: 767px) {
+    width: 20%;
+  }
 `
 
 const ItemLista = styled.li`
