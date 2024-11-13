@@ -1,10 +1,15 @@
 // importacoes
 import { useState } from 'react'
-import { Botao, ItemProps, ItemRestaurante } from '../../globais'
+import { selecionar } from '../../armazem/redutores/cardapio'
+import { adicao } from '../../armazem/redutores/carrinho'
+// ------------------------------
+import { Botao, ItemCardapio, ItemProps, ItemRestaurante } from '../../globais'
 import Item from '../item/Item'
 import ListaContainer, { Caixa, Modal, ModalContainer } from './estilos'
 // imagens
 import fechar from '../../ativos/imagens/fechar.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../armazem'
 
 // tipo
 type Props = {
@@ -17,18 +22,42 @@ type Props = {
 
 // componente
 const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
-  // estados
-  const [itemSel, setItemSel] = useState<ItemProps>()
+  // busca o estado do item selecionado
+  const { item: itemSel, estaSelecionado } = useSelector(
+    (estado: RootReducer) => estado.itemCard
+  )
 
+  // despacho
+  const despacho = useDispatch()
+
+  // funcoes
   const fechaModal = () => {
-    setItemSel({
+    // cria novo objeto vazio
+    const itemVazio: ItemProps = {
       descricao: '',
       imagem: '',
       preco: 0,
       titulo: '',
       tipo: tipo,
       categorias: []
-    })
+    }
+    // executa acao
+    despacho(selecionar(itemVazio))
+  }
+
+  const adicionarItemCarrinho = () => {
+    // cria um item cardapio
+    const itemNovo: ItemCardapio = {
+      descricao: itemSel.descricao,
+      foto: itemSel.imagem,
+      id: itemSel.id as number,
+      nome: itemSel.titulo,
+      porcao: itemSel.categorias?.join('') as string,
+      preco: itemSel.preco as number
+    }
+    // executa acao
+    despacho(adicao(itemNovo))
+    fechaModal()
   }
 
   // def retorno
@@ -52,7 +81,6 @@ const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
                 nota={i.avaliacao}
                 descricao={i.descricao}
                 tipo={tipo}
-                exibirModal={setItemSel}
               ></Item>
             )
           })
@@ -68,29 +96,28 @@ const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
                 descricao={j.descricao}
                 tipo={tipo}
                 preco={j.preco}
-                exibirModal={setItemSel}
               ></Item>
             )
           })
         )}
       </ListaContainer>
       {/* modal */}
-      <Modal className={`modal ${itemSel?.titulo ? 'visivel' : ''}`}>
+      <Modal className={`modal ${estaSelecionado ? 'visivel' : ''}`}>
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <ModalContainer className="modal-body">
-              <img src={itemSel?.imagem} alt={itemSel?.titulo} />
+              <img src={itemSel.imagem} alt={itemSel.titulo} />
               <div>
-                <h1 className="modal-title fs-5">{itemSel?.titulo}</h1>
-                <>{console.log(itemSel?.categorias)}</>
+                <h1 className="modal-title fs-5">{itemSel.titulo}</h1>
+                <>{console.log(itemSel.categorias)}</>
                 <p>
-                  {itemSel?.descricao} <br /> <br />
-                  {itemSel?.categorias?.join('') !== undefined && (
-                    <>Serve: {itemSel?.categorias?.join(' ')}</>
+                  {itemSel.descricao} <br /> <br />
+                  {itemSel.categorias?.join('') !== undefined && (
+                    <>Serve: {itemSel.categorias.join(' ')}</>
                   )}
                 </p>
-                <Botao type="button" onClick={fechaModal}>
-                  Adicionar ao carrinho - R$ {itemSel?.preco}
+                <Botao type="button" onClick={adicionarItemCarrinho}>
+                  Adicionar ao carrinho - R$ {itemSel.preco}
                 </Botao>
               </div>
               <button type="button" onClick={fechaModal}>

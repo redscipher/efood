@@ -25,7 +25,6 @@ type ItemProps = {
   nota?: number
   descricao: string
   tipo: 'heroi' | 'restaurante'
-  exibirModal?: (item: ItemProps) => void
   preco?: number
   id?: number
 }

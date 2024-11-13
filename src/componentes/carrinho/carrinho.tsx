@@ -45,7 +45,7 @@ const Carrinho = () => {
                 <div>
                   <Titulo>{item.nome}</Titulo>
                   <Descricao tamanho={14} tipo="heroi">
-                    {item.preco}
+                    R$ {item.preco}
                   </Descricao>
                 </div>
                 <button type="button">

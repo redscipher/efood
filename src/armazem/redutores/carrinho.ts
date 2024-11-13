@@ -20,7 +20,7 @@ const carrinhoParte = createSlice({
   // redutores = acoes que manipula a parte 'slice'
   reducers: {
     adicao: (estado, acao: PayloadAction<ItemCardapio>) => {
-      alert('adicinando item carrinho')
+      estado.itens.push(acao.payload)
     },
     remover: (estado, acao: PayloadAction<number>) => {
       alert('removendo item carrinho')

@@ -1,5 +1,8 @@
 // importacoes
-import estrela from '../../ativos/imagens/estrela.png'
+import { useDispatch } from 'react-redux'
+// acoes
+import { selecionar } from '../../armazem/redutores/cardapio'
+// ---------------------------------------
 import { Botao, Descricao, ItemProps } from '../../globais'
 import ItemContainer, {
   Categorias,
@@ -10,66 +13,53 @@ import ItemContainer, {
   TituloContainer,
   LinkBotao
 } from './estilos'
+// imagems
+import estrela from '../../ativos/imagens/estrela.png'
 
 // componente
-const Item = ({
-  imagem,
-  titulo,
-  categorias,
-  nota,
-  descricao,
-  tipo,
-  exibirModal,
-  preco,
-  id
-}: ItemProps) => {
-  // funcoes
-  const confirmaExibirModal = () => {
-    if (exibirModal) {
-      exibirModal({
-        descricao,
-        imagem,
-        preco: preco ?? 0,
-        titulo,
-        tipo: 'heroi',
-        categorias
-      })
-    }
-  }
+const Item = (item: ItemProps) => {
+  // cria o despacho de acoes
+  const despacho = useDispatch()
 
+  // funcoes
   const getDescricao = (descricao: string) => {
-    if (descricao.length > 100 && tipo === 'restaurante') {
+    if (descricao.length > 100 && item.tipo === 'restaurante') {
       return descricao.slice(0, 97) + '...'
-    } else if (descricao.length > 250 && tipo === 'heroi') {
+    } else if (descricao.length > 250 && item.tipo === 'heroi') {
       return descricao.slice(0, 247) + '...'
     }
     return descricao
   }
 
+  const confirmaExibirModal = () => {
+    // executa acao
+    despacho(selecionar(item))
+  }
+
   // def retorno
   return (
-    <ItemContainer tipo={tipo}>
-      <img src={imagem} alt={titulo} />
+    <ItemContainer tipo={item.tipo}>
+      <img src={item.imagem} alt={item.titulo} />
       <Categorias>
         {/* loop p/ renderizar as categorias */}
-        {categorias !== undefined &&
-          categorias.map((c, ind) => <li key={ind}>{c}</li>)}
+        {item.categorias !== undefined &&
+          item.categorias.map((c, ind) => <li key={ind}>{c}</li>)}
       </Categorias>
-      <ItemInfo tipo={tipo}>
+      <ItemInfo tipo={item.tipo}>
         <TituloContainer>
-          <Titulo>{titulo}</Titulo>
-          {nota !== undefined && (
+          <Titulo>{item.titulo}</Titulo>
+          {item.nota !== undefined && (
             <Classe>
-              <Nota as="p">{nota}</Nota>
+              <Nota as="p">{item.nota}</Nota>
               <img src={estrela} alt="Classificação" />
             </Classe>
           )}
         </TituloContainer>
-        <Descricao tamanho={14} tipo={tipo}>
-          {getDescricao(descricao)}
+        <Descricao tamanho={14} tipo={item.tipo}>
+          {getDescricao(item.descricao)}
         </Descricao>
-        {tipo === 'heroi' ? (
-          <LinkBotao to={`/restaurante/${id}`}>Saiba mais</LinkBotao>
+        {item.tipo === 'heroi' ? (
+          <LinkBotao to={`/restaurante/${item.id}`}>Saiba mais</LinkBotao>
         ) : (
           <Botao type="button" onClick={confirmaExibirModal}>
             Adicionar ao carrinho
