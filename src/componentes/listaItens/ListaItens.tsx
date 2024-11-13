@@ -1,5 +1,4 @@
 // importacoes
-import { useState } from 'react'
 import { selecionar } from '../../armazem/redutores/cardapio'
 import { adicao } from '../../armazem/redutores/carrinho'
 // ------------------------------
