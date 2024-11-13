@@ -1,10 +1,14 @@
 // importacoes
 import { configureStore } from '@reduxjs/toolkit'
 import api from '../servicos/api'
+// acoes
+import carrinhoRedutor from '../armazem/redutores/carrinho'
 
 // 'store' do redux
 const armazem = configureStore({
   reducer: {
+    // redutores
+    carrinho: carrinhoRedutor,
     [api.reducerPath]: api.reducer // trazer a responsabilidade das conexoes p/ o redux
   },
   middleware: (gdm) => gdm().concat(api.middleware) // tratamento p/ conexoes url

@@ -6,7 +6,8 @@ const CORES = {
   bege: '#FFF8F2',
   vermelho_claro: '#E66767',
   bege_2: '#FFEBD9',
-  branco: '#FFFFFF'
+  branco: '#FFFFFF',
+  preto: '#000'
 }
 
 // tipos
