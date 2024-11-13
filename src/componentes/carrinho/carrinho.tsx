@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../armazem'
 // --------------------------------------
 import { Titulo } from '../item/estilos'
-import { Botao, Descricao } from '../../globais'
+import { Botao, Descricao, formataNumbero } from '../../globais'
 // acoes
 import { abrirFechar, remover } from '../../armazem/redutores/carrinho'
 // imagens
@@ -21,10 +21,12 @@ const Carrinho = () => {
   const despacho = useDispatch()
 
   // funcoes
-  const retornaValorTotal = (): number => {
-    return itens.reduce((soma, atual) => {
+  const retornaValorTotal = (): string => {
+    const valorTotal = itens.reduce((soma, atual) => {
       return (soma += atual.preco)
     }, 0)
+    // def retorno
+    return formataNumbero(valorTotal)
   }
 
   const fecharCarrinho = () => {
@@ -50,7 +52,7 @@ const Carrinho = () => {
                 <div>
                   <Titulo>{item.nome}</Titulo>
                   <Descricao tamanho={14} tipo="heroi">
-                    R$ {item.preco}
+                    {formataNumbero(item.preco)}
                   </Descricao>
                 </div>
                 <button
@@ -67,7 +69,7 @@ const Carrinho = () => {
         </ul>
         <E.Total>
           <p>Valor total</p>
-          <span>R$ {retornaValorTotal()}</span>
+          <span>{retornaValorTotal()}</span>
         </E.Total>
         <Botao type="button">Continuar com a entrega</Botao>
       </E.default>

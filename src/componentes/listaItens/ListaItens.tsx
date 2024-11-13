@@ -2,7 +2,13 @@
 import { selecionar } from '../../armazem/redutores/cardapio'
 import { adicao } from '../../armazem/redutores/carrinho'
 // ------------------------------
-import { Botao, ItemCardapio, ItemProps, ItemRestaurante } from '../../globais'
+import {
+  Botao,
+  formataNumbero,
+  ItemCardapio,
+  ItemProps,
+  ItemRestaurante
+} from '../../globais'
 import Item from '../item/Item'
 import ListaContainer, { Caixa, Modal, ModalContainer } from './estilos'
 // imagens
@@ -116,7 +122,8 @@ const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
                   )}
                 </p>
                 <Botao type="button" onClick={adicionarItemCarrinho}>
-                  Adicionar ao carrinho - R$ {itemSel.preco}
+                  Adicionar ao carrinho -{' '}
+                  {formataNumbero(itemSel.preco as number)}
                 </Botao>
               </div>
               <button type="button" onClick={fechaModal}>

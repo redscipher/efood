@@ -123,7 +123,15 @@ const Botao = styled.button`
   text-align: center;
 `
 
+// funcoes
+const formataNumbero = (valor: number): string => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(valor)
+}
+
 // exportacoes
 export default CSSGlobal
-export { CORES, Descricao, Imagem, Botao }
+export { CORES, Descricao, Imagem, Botao, formataNumbero }
 export type { ItemProps, ItemRestaurante, ItemCardapio }
