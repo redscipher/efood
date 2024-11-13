@@ -100,6 +100,8 @@ const Descricao = styled.p<Omit<Props, 'margem_topo' | 'margem_baixo'>>`
   /* tamanho */
   max-width: 456px;
   max-height: 88px;
+  /* scrolls */
+  overflow-y: auto;
 `
 
 const Imagem = styled.img<Omit<Props, 'tamanho'>>`
