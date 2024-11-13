@@ -13,6 +13,8 @@ const CarrinhoContainer = styled.aside`
   /* visualizacao */
   display: flex;
   flex-direction: column;
+  /* exibe scrolls */
+  overflow-y: auto;
 
   ul {
     display: block;
