@@ -23,7 +23,7 @@ const carrinhoParte = createSlice({
       estado.itens.push(acao.payload)
     },
     remover: (estado, acao: PayloadAction<number>) => {
-      alert('removendo item carrinho')
+      estado.itens = estado.itens.filter((item) => item.id !== acao.payload)
     },
     abrirFechar: (estado, acao: PayloadAction<boolean>) => {
       estado.estaAberto = acao.payload

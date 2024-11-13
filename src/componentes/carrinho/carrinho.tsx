@@ -7,7 +7,7 @@ import { RootReducer } from '../../armazem'
 import { Titulo } from '../item/estilos'
 import { Botao, Descricao } from '../../globais'
 // acoes
-import { abrirFechar } from '../../armazem/redutores/carrinho'
+import { abrirFechar, remover } from '../../armazem/redutores/carrinho'
 // imagens
 import delecao from '../../ativos/imagens/lixeira-de-reciclagem.png'
 
@@ -32,6 +32,11 @@ const Carrinho = () => {
     despacho(abrirFechar(!estaAberto))
   }
 
+  const removerItem = (id: number) => {
+    // executa acao
+    despacho(remover(id))
+  }
+
   // def retorno
   return (
     <E.CarrinhoCaixa className={estaAberto ? 'visivel' : ''}>
@@ -48,7 +53,12 @@ const Carrinho = () => {
                     R$ {item.preco}
                   </Descricao>
                 </div>
-                <button type="button">
+                <button
+                  type="button"
+                  onClick={() => {
+                    removerItem(item.id)
+                  }}
+                >
                   <img src={delecao} alt="Icone para deletar um item" />
                 </button>
               </E.ItemLista>
