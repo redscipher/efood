@@ -16,6 +16,10 @@ const CarrinhoContainer = styled.aside`
   /* exibe scrolls */
   overflow-y: auto;
 
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
+
   ul {
     display: block;
     padding: 32px 8px 0 8px;
@@ -30,6 +34,16 @@ const CarrinhoContainer = styled.aside`
     margin: 0 8px 0 8px;
     /* largura */
     width: 344px;
+  }
+
+  /* smartphones */
+  @media screen and (max-width: 767px) {
+    max-width: 80vw;
+
+    ${Botao} {
+      width: 90%;
+      font-size: 12px;
+    }
   }
 `
 
@@ -99,6 +113,18 @@ const ItemLista = styled.li`
 
   ${Titulo} {
     margin-bottom: 16px;
+  }
+
+  /* smartphones */
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin-bottom: 8px;
+    }
   }
 `
 

@@ -18,7 +18,7 @@ const ItemContainer = styled.div<Props>`
 
   /* imagens */
   > img {
-    width: ${(props) => (props.tipo === 'heroi' ? '472px' : '304px')};
+    width: 100%;
     height: ${(props) => (props.tipo === 'heroi' ? '217px' : '167px')};
     object-fit: cover;
   }
