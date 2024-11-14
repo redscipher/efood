@@ -7,9 +7,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../armazem'
 // acoes
 import { abrirFechar } from '../../armazem/redutores/carrinho'
+import { useParams } from 'react-router-dom'
 
 // componente
 const Cabecalho = () => {
+  // parametros da URL
+  const { id } = useParams()
   // carrinho
   const { itens, estaAberto } = useSelector(
     (estado: RootReducer) => estado.carrinho
@@ -34,7 +37,7 @@ const Cabecalho = () => {
           src={logo}
           alt="Logo do E-FOOD"
         />
-        <LinkMarca to="" onClick={abrirCarrinho}>
+        <LinkMarca to={`/restaurante/${id}/carrinho`} onClick={abrirCarrinho}>
           {itens.length} produto(s) no carrinho
         </LinkMarca>
       </div>

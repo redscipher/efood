@@ -2,21 +2,22 @@
 import * as E from './estilos'
 // -------------------------------------
 import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../armazem'
+import { RootReducer } from '../../../../armazem'
 // --------------------------------------
-import { Titulo } from '../item/estilos'
-import { Botao, Descricao, formataNumbero } from '../../globais'
+import { Titulo } from '../../../item/estilos'
+import { BotaoLink, Descricao, formataNumbero } from '../../../../globais'
 // acoes
-import { abrirFechar, remover } from '../../armazem/redutores/carrinho'
+import { remover } from '../../../../armazem/redutores/carrinho'
 // imagens
-import delecao from '../../ativos/imagens/lixeira-de-reciclagem.png'
+import delecao from '../../../../ativos/imagens/lixeira-de-reciclagem.png'
+import { useParams } from 'react-router-dom'
 
 // componente
 const Carrinho = () => {
+  // parametros da URL
+  const { id } = useParams()
   // itens do carrinho + controle se esta aberto
-  const { estaAberto, itens } = useSelector(
-    (estado: RootReducer) => estado.carrinho
-  )
+  const { itens } = useSelector((estado: RootReducer) => estado.carrinho)
   // despacho de acoes p/ armazem
   const despacho = useDispatch()
 
@@ -29,11 +30,6 @@ const Carrinho = () => {
     return formataNumbero(valorTotal)
   }
 
-  const fecharCarrinho = () => {
-    // executa acao
-    despacho(abrirFechar(!estaAberto))
-  }
-
   const removerItem = (id: number) => {
     // executa acao
     despacho(remover(id))
@@ -41,9 +37,8 @@ const Carrinho = () => {
 
   // def retorno
   return (
-    <E.CarrinhoCaixa className={estaAberto ? 'visivel' : ''}>
-      <E.CarrinhoOpaco onClick={fecharCarrinho} />
-      <E.default>
+    <E.default>
+      <div>
         <ul>
           {itens.map((item, ind) => {
             return (
@@ -71,9 +66,11 @@ const Carrinho = () => {
           <p>Valor total</p>
           <span>{retornaValorTotal()}</span>
         </E.Total>
-        <Botao type="button">Continuar com a entrega</Botao>
-      </E.default>
-    </E.CarrinhoCaixa>
+        <BotaoLink to={`/restaurante/${id}/entrega`} type="button">
+          Continuar com a entrega
+        </BotaoLink>
+      </div>
+    </E.default>
   )
 }
 

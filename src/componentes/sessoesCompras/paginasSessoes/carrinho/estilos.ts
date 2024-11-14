@@ -1,31 +1,21 @@
 // importacoes
 import styled from 'styled-components'
-import { Botao, CORES } from '../../globais'
-import { Titulo } from '../item/estilos'
+import { BotaoLink, CORES } from '../../../../globais'
+import { Titulo } from '../../../item/estilos'
 
 // estilos
 const CarrinhoContainer = styled.aside`
-  max-width: 360px;
-  width: 100%;
-  height: 100%;
-  background-color: ${CORES.vermelho_claro};
-  color: ${CORES.bege_2};
-  /* visualizacao */
   display: flex;
   flex-direction: column;
   /* exibe scrolls */
   overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 1px;
-  }
 
   ul {
     display: block;
     padding: 32px 8px 0 8px;
   }
 
-  ${Botao} {
+  ${BotaoLink} {
     font-size: 14px;
     line-height: 16px;
     font-weight: bold;
@@ -38,10 +28,7 @@ const CarrinhoContainer = styled.aside`
 
   /* smartphones */
   @media screen and (max-width: 767px) {
-    max-width: 80vw;
-    width: 100%;
-
-    ${Botao} {
+    ${BotaoLink} {
       width: 95%;
       font-size: 12px;
     }
@@ -55,36 +42,6 @@ const Total = styled.div`
   font-size: 14px;
   line-height: 16px;
   font-weight: normal;
-`
-
-const CarrinhoCaixa = styled.div`
-  /* posicao fixa p/ ocupar a tela toda */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* visualizacao */
-  display: none;
-  justify-content: flex-end;
-  /* exibe na frente de tudo */
-  z-index: 1;
-
-  &.visivel {
-    display: flex;
-  }
-`
-
-const CarrinhoOpaco = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: ${CORES.preto};
-  opacity: 0.8;
-
-  /* smartphones */
-  @media screen and (max-width: 767px) {
-    width: 20%;
-  }
 `
 
 const ItemLista = styled.li`
@@ -136,4 +93,4 @@ const ItemLista = styled.li`
 
 // exportacoes
 export default CarrinhoContainer
-export { CarrinhoCaixa, CarrinhoOpaco, ItemLista, Total }
+export { ItemLista, Total }

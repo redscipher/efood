@@ -1,4 +1,5 @@
 // importacoes
+import { Link } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
 // constantes
@@ -7,7 +8,8 @@ const CORES = {
   vermelho_claro: '#E66767',
   bege_2: '#FFEBD9',
   branco: '#FFFFFF',
-  preto: '#000'
+  preto: '#000',
+  cinza: '#4B4B4B'
 }
 
 // tipos
@@ -125,6 +127,20 @@ const Botao = styled.button`
   text-align: center;
 `
 
+const BotaoLink = styled(Link)`
+  line-height: 16px;
+  padding: 4px 6px;
+  margin: 8px 8px;
+  border: none;
+  height: 24px;
+  text-decoration: none;
+  background-color: ${CORES.bege_2};
+  color: ${CORES.vermelho_claro};
+  width: 100%;
+  display: block;
+  text-align: center;
+`
+
 // funcoes
 const formataNumbero = (valor: number): string => {
   return new Intl.NumberFormat('pt-BR', {
@@ -135,5 +151,5 @@ const formataNumbero = (valor: number): string => {
 
 // exportacoes
 export default CSSGlobal
-export { CORES, Descricao, Imagem, Botao, formataNumbero }
+export { CORES, Descricao, Imagem, Botao, formataNumbero, BotaoLink }
 export type { ItemProps, ItemRestaurante, ItemCardapio }

@@ -6,7 +6,7 @@ import CSSGlobal from './globais'
 import Rotas from './paginas/rotas'
 import Rodape from './componentes/rodape'
 import armazem from './armazem'
-import Carrinho from './componentes/carrinho/carrinho'
+import SessoesCompras from './componentes/sessoesCompras/sessoesCompras'
 
 // componente pai principal
 function App() {
@@ -19,7 +19,7 @@ function App() {
         {/* componente com as paginas */}
         <Rotas />
         <Rodape />
-        <Carrinho />
+        <SessoesCompras />
       </BrowserRouter>
     </Provider>
   )
