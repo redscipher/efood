@@ -21,10 +21,19 @@ const Carrinho = () => {
   // despacho de acoes p/ armazem
   const despacho = useDispatch()
 
+  // variaveis
+  let quantidade: number, valorTotal: number
+
   // funcoes
   const retornaValorTotal = (): string => {
+    // variavel temp
+    let qtdTemp: number
+    // ----------------------------------------------
     const valorTotal = itens.reduce((soma, atual) => {
-      return (soma += atual.preco)
+      // quantidade
+      qtdTemp = atual.qtd ? atual.qtd : 1
+      // def retorno
+      return (soma += qtdTemp * atual.preco)
     }, 0)
     // def retorno
     return formataNumero(valorTotal)
@@ -41,13 +50,18 @@ const Carrinho = () => {
       <div>
         <ul>
           {itens.map((item, ind) => {
+            // calculos
+            quantidade = item.qtd ? item.qtd : 1
+            valorTotal = quantidade * item.preco
+            // def retorno
             return (
               <E.ItemLista key={ind}>
                 <img src={item.foto} alt={item.nome} />
                 <div>
                   <Titulo>{item.nome}</Titulo>
                   <Descricao tamanho={14} tipo="heroi">
-                    {formataNumero(item.preco)}
+                    {quantidade} Und. x {formataNumero(item.preco)} ={' '}
+                    {formataNumero(valorTotal)}
                   </Descricao>
                 </div>
                 <button

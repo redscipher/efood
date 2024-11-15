@@ -38,6 +38,7 @@ type ItemCardapio = {
   nome: string
   descricao: string
   porcao: string
+  qtd?: number
 }
 
 type ItemRestaurante = {

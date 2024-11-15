@@ -1,6 +1,6 @@
 // importacoes
 import styled from 'styled-components'
-import { Botao, CORES } from '../../globais'
+import { Botao, BotaoLink, CORES } from '../../globais'
 
 // tipos
 type Props = {
@@ -122,12 +122,13 @@ const ModalContainer = styled.div`
       max-width: 656px;
     }
 
-    button {
+    ${BotaoLink} {
       width: 218px;
       height: 24px;
       margin-bottom: 27px;
       font-size: 14px;
       line-height: 16px;
+      margin-left: 0;
     }
   }
 

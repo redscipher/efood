@@ -1,9 +1,9 @@
 // importacoes
 import { selecionar } from '../../armazem/redutores/cardapio'
-import { adicao } from '../../armazem/redutores/carrinho'
+import { adicao, abrirFechar, remover } from '../../armazem/redutores/carrinho'
 // ------------------------------
 import {
-  Botao,
+  BotaoLink,
   formataNumero,
   ItemCardapio,
   ItemProps,
@@ -15,6 +15,7 @@ import ListaContainer, { Caixa, Modal, ModalContainer } from './estilos'
 import fechar from '../../ativos/imagens/fechar.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../armazem'
+import { useParams } from 'react-router-dom'
 
 // tipo
 type Props = {
@@ -27,9 +28,16 @@ type Props = {
 
 // componente
 const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
+  // busca id parametro
+  const { id } = useParams()
+
   // busca o estado do item selecionado
   const { item: itemSel, estaSelecionado } = useSelector(
     (estado: RootReducer) => estado.itemCard
+  )
+
+  const { itens: itensCarrinho } = useSelector(
+    (estado: RootReducer) => estado.carrinho
   )
 
   // despacho
@@ -51,6 +59,19 @@ const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
   }
 
   const adicionarItemCarrinho = () => {
+    // variavel controladora itens
+    let qtdItens: number
+    // verifica se ja existe item no carrinho
+    const encontrado = itensCarrinho.find((item) => item.id === itemSel.id)
+    //---------------------------
+    if (encontrado) {
+      // salva quantidade item
+      qtdItens = (encontrado.qtd ? encontrado.qtd : 1) + 1
+      // remove item primeiramente
+      despacho(remover(encontrado.id))
+    } else {
+      qtdItens = 1
+    }
     // cria um item cardapio
     const itemNovo: ItemCardapio = {
       descricao: itemSel.descricao,
@@ -58,11 +79,14 @@ const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
       id: itemSel.id as number,
       nome: itemSel.titulo,
       porcao: itemSel.categorias?.join('') as string,
-      preco: itemSel.preco as number
+      preco: itemSel.preco as number,
+      qtd: qtdItens
     }
     // executa acao
     despacho(adicao(itemNovo))
     fechaModal()
+    // abre carrinho
+    despacho(abrirFechar(true))
   }
 
   // def retorno
@@ -121,10 +145,14 @@ const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
                     <>Serve: {itemSel.categorias.join(' ')}</>
                   )}
                 </p>
-                <Botao type="button" onClick={adicionarItemCarrinho}>
+                <BotaoLink
+                  to={`/restaurante/${id}/carrinho`}
+                  type="button"
+                  onClick={adicionarItemCarrinho}
+                >
                   Adicionar ao carrinho -{' '}
                   {formataNumero(itemSel.preco as number)}
-                </Botao>
+                </BotaoLink>
               </div>
               <button type="button" onClick={fechaModal}>
                 <img src={fechar} alt="Icone para fechar o modal" />
