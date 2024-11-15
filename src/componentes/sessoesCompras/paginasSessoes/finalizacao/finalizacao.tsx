@@ -21,7 +21,7 @@ const Finalizacao = () => {
   }
 
   const finalizarPedido = () => {
-    despacho(confirmarPedido())
+    despacho(confirmarPedido(ID))
     despacho(esvaziar())
     fecharCarrinho()
   }

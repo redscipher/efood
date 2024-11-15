@@ -52,6 +52,35 @@ type ItemRestaurante = {
   cardapio: ItemCardapio[]
 }
 
+type Endereco = {
+  description: string
+  city: string
+  zipCode: string
+  number: number
+  complement: string
+}
+
+type DadosEndereco = {
+  receiver: string
+  address: Endereco
+}
+
+type DadosExpiracao = {
+  month: number
+  year: number
+}
+
+type DadosCartao = {
+  name: string
+  number: string
+  code: number
+  expires: DadosExpiracao
+}
+
+type DadosPagamento = {
+  card: DadosCartao
+}
+
 // estilos
 const CSSGlobal = createGlobalStyle`
   *{
@@ -222,4 +251,10 @@ export {
   Campos,
   Descritivo
 }
-export type { ItemProps, ItemRestaurante, ItemCardapio }
+export type {
+  ItemProps,
+  ItemRestaurante,
+  ItemCardapio,
+  DadosEndereco,
+  DadosPagamento
+}

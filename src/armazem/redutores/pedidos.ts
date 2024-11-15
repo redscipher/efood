@@ -1,42 +1,13 @@
 // importacoes
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ItemCardapio } from '../../globais'
+import { DadosEndereco, DadosPagamento, ItemCardapio } from '../../globais'
 
 // tipos
-type Endereco = {
-  description: string
-  city: string
-  zipCode: string
-  number: number
-  complement: string
-}
-
-type DadosEndereco = {
-  receiver: string
-  address: Endereco
-}
-
-type DadosExpiracao = {
-  month: number
-  year: number
-}
-
-type DadosCartao = {
-  name: string
-  number: string
-  code: number
-  expires: DadosExpiracao
-}
-
-type DadosPagamento = {
-  card: DadosCartao
-}
-
 type Pedido = {
-  id: string
-  products: ItemCardapio[]
-  delivery: DadosEndereco
-  payment: DadosPagamento
+  id?: string
+  products?: ItemCardapio[]
+  delivery?: DadosEndereco
+  payment?: DadosPagamento
 }
 
 type PedidosEstado = {
@@ -48,13 +19,40 @@ const initialState: PedidosEstado = {
   itens: []
 }
 
+const retornaUltimoIdx = () => {
+  return initialState.itens.length
+}
+
 // parte
 const pedidoParte = createSlice({
   name: 'pedido',
   initialState,
   reducers: {
-    confirmarPedido: (estado) => {
+    confirmarPedido: (estado, acao: PayloadAction<string>) => {
+      // retorna ultimo indice
+      const idx = retornaUltimoIdx()
+      // adiciona endereco
+      estado.itens[idx].id = acao.payload
       alert('Pedido confirmado!')
+    },
+    adicionarItens: (estado, acao: PayloadAction<ItemCardapio[]>) => {
+      const novoPedido: Pedido = {
+        products: acao.payload
+      }
+      // cria novo pedido
+      estado.itens.push(novoPedido)
+    },
+    adicionarEndereco: (estado, acao: PayloadAction<DadosEndereco>) => {
+      // retorna ultimo indice
+      const idx = retornaUltimoIdx()
+      // adiciona endereco
+      estado.itens[idx].delivery = acao.payload
+    },
+    adicionarPagamento: (estado, acao: PayloadAction<DadosPagamento>) => {
+      // retorna ultimo indice
+      const idx = retornaUltimoIdx()
+      // adiciona endereco
+      estado.itens[idx].payment = acao.payload
     }
   }
 })
@@ -62,4 +60,9 @@ const pedidoParte = createSlice({
 // exportacoes
 export default pedidoParte.reducer // redutor
 // acoes
-export const { confirmarPedido } = pedidoParte.actions
+export const {
+  confirmarPedido,
+  adicionarItens,
+  adicionarEndereco,
+  adicionarPagamento
+} = pedidoParte.actions
