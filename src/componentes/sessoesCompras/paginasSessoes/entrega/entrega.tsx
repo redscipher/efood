@@ -1,6 +1,13 @@
 // importacoes
 import { useParams } from 'react-router-dom'
-import { BotaoLink } from '../../../../globais'
+import {
+  BotaoLink,
+  Campos,
+  EntradaMeia,
+  Entradas,
+  Rotulos,
+  Titulo
+} from '../../../../globais'
 import * as E from './estilos'
 
 const Entrega = () => {
@@ -9,34 +16,34 @@ const Entrega = () => {
   // def retorno
   return (
     <E.default>
-      <E.Titulo>Entrega</E.Titulo>
+      <Titulo>Entrega</Titulo>
       <form action="">
-        <E.Entradas>
+        <Entradas>
           {/* entrada 1 */}
-          <E.rotulos htmlFor="">Quem irá receber</E.rotulos>
-          <E.campos type="text" required />
+          <Rotulos htmlFor="">Quem irá receber</Rotulos>
+          <Campos type="text" required />
           {/* entrada 2 */}
-          <E.rotulos htmlFor="">Endereço</E.rotulos>
-          <E.campos type="text" required />
+          <Rotulos htmlFor="">Endereço</Rotulos>
+          <Campos type="text" required />
           {/* entrada 3 */}
-          <E.rotulos htmlFor="">Cidade</E.rotulos>
-          <E.campos type="text" required />
-          <E.EntradaMeia>
+          <Rotulos htmlFor="">Cidade</Rotulos>
+          <Campos type="text" required />
+          <EntradaMeia>
             {/* entrada 4 */}
             <div>
-              <E.rotulos htmlFor="">CEP</E.rotulos>
-              <E.campos type="text" required />
+              <Rotulos htmlFor="">CEP</Rotulos>
+              <Campos type="text" required />
             </div>
             {/* entrada 5 */}
             <div>
-              <E.rotulos htmlFor="">Número</E.rotulos>
-              <E.campos type="text" required />
+              <Rotulos htmlFor="">Número</Rotulos>
+              <Campos type="text" required />
             </div>
-          </E.EntradaMeia>
+          </EntradaMeia>
           {/* entrada 6 */}
-          <E.rotulos htmlFor="">Complemento (opcional)</E.rotulos>
-          <E.campos type="text" />
-        </E.Entradas>
+          <Rotulos htmlFor="">Complemento (opcional)</Rotulos>
+          <Campos type="text" />
+        </Entradas>
         {/* botoes */}
         <div>
           <BotaoLink to={`/restaurante/${id}/pagamento`} type="button">
