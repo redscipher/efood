@@ -1,6 +1,6 @@
 // importacoes
 import styled from 'styled-components'
-import { BotaoLink } from '../../../../globais'
+import { BotaoLink, CORES } from '../../../../globais'
 
 // estilos
 const EntregaContainer = styled.div`
@@ -18,6 +18,14 @@ const EntregaContainer = styled.div`
       font-weight: bold;
       font-size: 14px;
       line-height: 16px;
+    }
+
+    small {
+      color: ${CORES.vermelho};
+    }
+
+    #idUltEntrada {
+      margin-bottom: 24px;
     }
   }
 `

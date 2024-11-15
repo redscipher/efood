@@ -8,6 +8,7 @@ import { Titulo } from '../../../item/estilos'
 import { BotaoLink, Descricao, formataNumero } from '../../../../globais'
 // acoes
 import { remover } from '../../../../armazem/redutores/carrinho'
+import { adicionarItens } from '../../../../armazem/redutores/pedidos'
 // imagens
 import delecao from '../../../../ativos/imagens/lixeira-de-reciclagem.png'
 import { useParams } from 'react-router-dom'
@@ -58,6 +59,11 @@ const Carrinho = () => {
     return qtdTotal
   }
 
+  const adicionarItensPedido = () => {
+    // verifica se este id ja existe
+    despacho(adicionarItens(itens))
+  }
+
   // chamada da funcao
   const qtdTotal = retornaQtdTotal()
 
@@ -103,7 +109,11 @@ const Carrinho = () => {
             <span>{retornaValorTotal()}</span>
           </div>
         </E.Total>
-        <BotaoLink to={`/restaurante/${id}/entrega`} type="button">
+        <BotaoLink
+          to={`/restaurante/${id}/entrega`}
+          onClick={adicionarItensPedido}
+          type="button"
+        >
           Continuar com a entrega
         </BotaoLink>
       </div>

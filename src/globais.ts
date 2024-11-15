@@ -9,7 +9,8 @@ const CORES = {
   bege_2: '#FFEBD9',
   branco: '#FFFFFF',
   preto: '#000',
-  cinza: '#4B4B4B'
+  cinza: '#4B4B4B',
+  vermelho: '#c0392b'
 }
 
 // tipos

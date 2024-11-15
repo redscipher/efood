@@ -12,14 +12,16 @@ type Pedido = {
 
 type PedidosEstado = {
   itens: Pedido[]
+  idAtual: string
 }
 
 // inicia estado da parte
 const initialState: PedidosEstado = {
-  itens: []
+  itens: [],
+  idAtual: ''
 }
 
-const retornaUltimoIdx = () => {
+export const retornaUltimoIdx = () => {
   return initialState.itens.length
 }
 
@@ -33,14 +35,26 @@ const pedidoParte = createSlice({
       const idx = retornaUltimoIdx()
       // adiciona endereco
       estado.itens[idx].id = acao.payload
+      estado.idAtual = ''
       alert('Pedido confirmado!')
     },
     adicionarItens: (estado, acao: PayloadAction<ItemCardapio[]>) => {
-      const novoPedido: Pedido = {
-        products: acao.payload
+      // validacao
+      if (estado.idAtual === undefined || estado.idAtual === '') {
+        // cria novo pedido
+        const novoPedido: Pedido = {
+          products: acao.payload,
+          id: (retornaUltimoIdx() + 1) as unknown as string
+        }
+        // cria novo pedido
+        estado.itens.push(novoPedido)
+        estado.idAtual = novoPedido.id as string
+      } else {
+        // ultimo ID
+        const idx = retornaUltimoIdx()
+        // atualiza pedido atual
+        estado.itens[idx].products = acao.payload
       }
-      // cria novo pedido
-      estado.itens.push(novoPedido)
     },
     adicionarEndereco: (estado, acao: PayloadAction<DadosEndereco>) => {
       // retorna ultimo indice
