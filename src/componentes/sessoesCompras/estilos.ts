@@ -39,6 +39,8 @@ const Sessoes = styled.div`
   height: 100%;
   background-color: ${CORES.vermelho_claro};
   color: ${CORES.bege_2};
+  /* exibe scrolls */
+  overflow-y: auto;
 
   &::-webkit-scrollbar {
     width: 1px;

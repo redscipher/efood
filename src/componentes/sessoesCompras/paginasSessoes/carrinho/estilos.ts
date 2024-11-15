@@ -7,8 +7,6 @@ import { Titulo } from '../../../item/estilos'
 const CarrinhoContainer = styled.aside`
   display: flex;
   flex-direction: column;
-  /* exibe scrolls */
-  overflow-y: auto;
 
   ul {
     display: block;
