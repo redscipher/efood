@@ -44,6 +44,23 @@ const Carrinho = () => {
     despacho(remover(id))
   }
 
+  const retornaQtdTotal = (): number => {
+    // variavel temp
+    let qtdTemp: number
+    // ----------------------------------------------
+    const qtdTotal = itens.reduce((soma, atual) => {
+      // quantidade
+      qtdTemp = atual.qtd ? atual.qtd : 1
+      // def retorno
+      return (soma += qtdTemp)
+    }, 0)
+    // def retorno
+    return qtdTotal
+  }
+
+  // chamada da funcao
+  const qtdTotal = retornaQtdTotal()
+
   // def retorno
   return (
     <E.default>
@@ -77,8 +94,14 @@ const Carrinho = () => {
           })}
         </ul>
         <E.Total>
-          <p>Valor total</p>
-          <span>{retornaValorTotal()}</span>
+          <div>
+            <p>Quantidade</p>
+            <span>Valor total</span>
+          </div>
+          <div>
+            <p>{qtdTotal <= 1 ? `${qtdTotal} item` : `${qtdTotal} itens`}</p>
+            <span>{retornaValorTotal()}</span>
+          </div>
         </E.Total>
         <BotaoLink to={`/restaurante/${id}/entrega`} type="button">
           Continuar com a entrega

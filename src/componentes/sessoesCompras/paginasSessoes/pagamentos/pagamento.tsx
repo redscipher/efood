@@ -23,8 +23,14 @@ const Pagamento = () => {
 
   // funcoes
   const retornaValorTotal = (): string => {
+    // variavel temp
+    let qtdTemp: number
+    // ----------------------------------------------
     const valorTotal = itens.reduce((soma, atual) => {
-      return (soma += atual.preco)
+      // quantidade
+      qtdTemp = atual.qtd ? atual.qtd : 1
+      // def retorno
+      return (soma += qtdTemp * atual.preco)
     }, 0)
     // def retorno
     return formataNumero(valorTotal)
