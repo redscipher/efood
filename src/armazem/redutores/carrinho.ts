@@ -27,6 +27,9 @@ const carrinhoParte = createSlice({
     },
     abrirFechar: (estado, acao: PayloadAction<boolean>) => {
       estado.estaAberto = acao.payload
+    },
+    esvaziar: (estado) => {
+      estado.itens = []
     }
   }
 })
@@ -34,4 +37,4 @@ const carrinhoParte = createSlice({
 // exportacoes
 export default carrinhoParte.reducer // exporta o redutor
 // redutores = acoes
-export const { adicao, remover, abrirFechar } = carrinhoParte.actions
+export const { adicao, remover, abrirFechar, esvaziar } = carrinhoParte.actions

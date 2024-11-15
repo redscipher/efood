@@ -1,14 +1,18 @@
 // importacoes
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Botao, Descritivo, Titulo } from '../../../../globais'
 import * as E from './estilos'
-import { abrirFechar } from '../../../../armazem/redutores/carrinho'
+import { abrirFechar, esvaziar } from '../../../../armazem/redutores/carrinho'
+import { RootReducer } from '../../../../armazem'
+import { adicionarPedido } from '../../../../armazem/redutores/pedidos'
 
 const Finalizacao = () => {
   // despacho de acoes p/ armazem
   const despacho = useDispatch()
+  // busca ultimo id
+  const { item } = useSelector((estado: RootReducer) => estado.pedido)
   // variaveis
-  const ID: string = '1'
+  const ID: string = (item.length + 1) as unknown as string
 
   // funcoes
   const fecharCarrinho = () => {
@@ -17,14 +21,15 @@ const Finalizacao = () => {
   }
 
   const confirmarPedido = () => {
-    alert('Pedido confirmado!')
+    despacho(adicionarPedido(ID as unknown as number))
+    despacho(esvaziar())
     fecharCarrinho()
   }
 
   // def retorno
   return (
     <E.default>
-      <Titulo>Pedido realizado - {ID}</Titulo>
+      <Titulo>Pedido realizado - {ID.toString().padStart(7, '0')}</Titulo>
       <div>
         <Descritivo tamanho={14}>
           Estamos felizes em informar que seu pedido já está em processo de
