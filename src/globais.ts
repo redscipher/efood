@@ -106,6 +106,11 @@ const Descricao = styled.p<Omit<Props, 'margem_topo' | 'margem_baixo'>>`
   overflow-y: auto;
 `
 
+const Descritivo = styled(Descricao)`
+  max-width: 100%;
+  max-height: 100%;
+`
+
 const Imagem = styled.img<Omit<Props, 'tamanho'>>`
   width: 125px;
   height: 57.5px;
@@ -193,7 +198,7 @@ const Campos = styled.input`
 `
 
 // funcoes
-const formataNumbero = (valor: number): string => {
+const formataNumero = (valor: number): string => {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
@@ -207,12 +212,13 @@ export {
   Descricao,
   Imagem,
   Botao,
-  formataNumbero,
+  formataNumero,
   BotaoLink,
   Entradas,
   EntradaMeia,
   Titulo,
   Rotulos,
-  Campos
+  Campos,
+  Descritivo
 }
 export type { ItemProps, ItemRestaurante, ItemCardapio }

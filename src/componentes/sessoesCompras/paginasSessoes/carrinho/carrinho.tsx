@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../../../armazem'
 // --------------------------------------
 import { Titulo } from '../../../item/estilos'
-import { BotaoLink, Descricao, formataNumbero } from '../../../../globais'
+import { BotaoLink, Descricao, formataNumero } from '../../../../globais'
 // acoes
 import { remover } from '../../../../armazem/redutores/carrinho'
 // imagens
@@ -27,7 +27,7 @@ const Carrinho = () => {
       return (soma += atual.preco)
     }, 0)
     // def retorno
-    return formataNumbero(valorTotal)
+    return formataNumero(valorTotal)
   }
 
   const removerItem = (id: number) => {
@@ -47,7 +47,7 @@ const Carrinho = () => {
                 <div>
                   <Titulo>{item.nome}</Titulo>
                   <Descricao tamanho={14} tipo="heroi">
-                    {formataNumbero(item.preco)}
+                    {formataNumero(item.preco)}
                   </Descricao>
                 </div>
                 <button

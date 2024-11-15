@@ -4,7 +4,7 @@ import { adicao } from '../../armazem/redutores/carrinho'
 // ------------------------------
 import {
   Botao,
-  formataNumbero,
+  formataNumero,
   ItemCardapio,
   ItemProps,
   ItemRestaurante
@@ -123,7 +123,7 @@ const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
                 </p>
                 <Botao type="button" onClick={adicionarItemCarrinho}>
                   Adicionar ao carrinho -{' '}
-                  {formataNumbero(itemSel.preco as number)}
+                  {formataNumero(itemSel.preco as number)}
                 </Botao>
               </div>
               <button type="button" onClick={fechaModal}>
