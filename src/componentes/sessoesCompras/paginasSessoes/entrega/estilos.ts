@@ -1,6 +1,6 @@
 // importacoes
 import styled from 'styled-components'
-import { BotaoLink, CORES } from '../../../../globais'
+import { BotaoLink } from '../../../../globais'
 
 // estilos
 const EntregaContainer = styled.div`
