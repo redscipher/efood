@@ -12,7 +12,7 @@ const armazem = configureStore({
     // redutores
     carrinho: carrinhoRedutor,
     itemCard: itemCardRedutor,
-    pedido: pedidoRedutor,
+    pedidos: pedidoRedutor,
     [api.reducerPath]: api.reducer // trazer a responsabilidade das conexoes p/ o redux
   },
   middleware: (gdm) => gdm().concat(api.middleware) // tratamento p/ conexoes url

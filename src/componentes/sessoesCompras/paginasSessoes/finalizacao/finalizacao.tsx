@@ -4,15 +4,15 @@ import { Botao, Descritivo, Titulo } from '../../../../globais'
 import * as E from './estilos'
 import { abrirFechar, esvaziar } from '../../../../armazem/redutores/carrinho'
 import { RootReducer } from '../../../../armazem'
-import { adicionarPedido } from '../../../../armazem/redutores/pedidos'
+import { confirmarPedido } from '../../../../armazem/redutores/pedidos'
 
 const Finalizacao = () => {
   // despacho de acoes p/ armazem
   const despacho = useDispatch()
   // busca ultimo id
-  const { item } = useSelector((estado: RootReducer) => estado.pedido)
+  const { itens } = useSelector((estado: RootReducer) => estado.pedidos)
   // variaveis
-  const ID: string = (item.length + 1) as unknown as string
+  const ID: string = (itens.length + 1) as unknown as string
 
   // funcoes
   const fecharCarrinho = () => {
@@ -20,8 +20,8 @@ const Finalizacao = () => {
     despacho(abrirFechar(false))
   }
 
-  const confirmarPedido = () => {
-    despacho(adicionarPedido(ID as unknown as number))
+  const finalizarPedido = () => {
+    despacho(confirmarPedido())
     despacho(esvaziar())
     fecharCarrinho()
   }
@@ -45,7 +45,7 @@ const Finalizacao = () => {
           Esperamos que desfrute de uma deliciosa e agradável experiência
           gastronômica. Bom apetite!
         </Descritivo>
-        <Botao type="button" onClick={confirmarPedido}>
+        <Botao type="button" onClick={finalizarPedido}>
           Concluir
         </Botao>
       </div>
