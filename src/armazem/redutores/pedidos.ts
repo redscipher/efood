@@ -1,15 +1,13 @@
 // importacoes
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { DadosEndereco, DadosPagamento, ItemCardapio } from '../../globais'
+import {
+  DadosEndereco,
+  DadosPagamento,
+  ItemCardapio,
+  Pedido
+} from '../../globais'
 
 // tipos
-type Pedido = {
-  id?: string
-  products?: ItemCardapio[]
-  delivery?: DadosEndereco
-  payment?: DadosPagamento
-}
-
 type PedidosEstado = {
   itens: Pedido[]
   idAtual: string

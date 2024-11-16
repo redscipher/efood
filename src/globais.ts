@@ -82,6 +82,13 @@ type DadosPagamento = {
   card: DadosCartao
 }
 
+type Pedido = {
+  id?: string
+  products?: ItemCardapio[]
+  delivery?: DadosEndereco
+  payment?: DadosPagamento
+}
+
 // estilos
 const CSSGlobal = createGlobalStyle`
   *{
@@ -257,5 +264,6 @@ export type {
   ItemRestaurante,
   ItemCardapio,
   DadosEndereco,
-  DadosPagamento
+  DadosPagamento,
+  Pedido
 }

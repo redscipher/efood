@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // importacoes
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ItemRestaurante } from '../globais'
+import { ItemRestaurante, Pedido } from '../globais'
 
 // controlador redux requisicao url
 const api = createApi({
@@ -14,10 +15,21 @@ const api = createApi({
     }),
     getCardapio: builder.query<ItemRestaurante, string>({
       query: (id) => `restaurantes/${id}`
+    }),
+    comprar: builder.mutation<any, Pedido>({
+      query: (body) => ({
+        url: 'checkout',
+        method: 'POST',
+        body
+      })
     })
   })
 })
 
 // exportacoes
 export default api
-export const { useGetRestaurantesQuery, useGetCardapioQuery } = api
+export const {
+  useGetRestaurantesQuery,
+  useGetCardapioQuery,
+  useComprarMutation
+} = api
