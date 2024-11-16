@@ -6,7 +6,7 @@ import { abrirFechar, esvaziar } from '../../../../armazem/redutores/carrinho'
 import { confirmarPedido } from '../../../../armazem/redutores/pedidos'
 import { useComprarMutation } from '../../../../servicos/api'
 import { RootReducer } from '../../../../armazem'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const Finalizacao = () => {
   const { itens, idAtual } = useSelector(
@@ -15,8 +15,11 @@ const Finalizacao = () => {
   // despacho de acoes p/ armazem
   const despacho = useDispatch()
 
+  // estado
+  const [flgConfirmarPedido, setFlgConfirmarPedido] = useState(false)
+
   // constante com funcao 'POST' p/ compra
-  const [comprar, { data, isSuccess, error }] = useComprarMutation()
+  const [comprar, { data, isSuccess, error, isError }] = useComprarMutation()
 
   // funcoes
   // busca o indice do id atual
@@ -33,11 +36,9 @@ const Finalizacao = () => {
 
   const efetuarCompra = () => {
     // efetua o 'POST' do pedido carregado
-    if (idx !== -1) {
-      comprar(itens[idx])
-    } else {
-      console.error('Pedido atual não encontrado')
-    }
+    comprar(itens[idx])
+    setFlgConfirmarPedido(!flgConfirmarPedido)
+    console.log(flgConfirmarPedido)
   }
 
   useEffect(() => {
@@ -47,7 +48,7 @@ const Finalizacao = () => {
       // esvazia + fecha modal
       despacho(esvaziar())
     }
-  }, [data, despacho, isSuccess])
+  }, [data, despacho, isSuccess, flgConfirmarPedido])
 
   if (error) {
     console.error('Erro ao comprar:', error)
@@ -80,7 +81,9 @@ const Finalizacao = () => {
             gastronômica. Bom apetite!
           </Descritivo>
         ) : (
-          <Descritivo tamanho={14}></Descritivo>
+          <Descritivo tamanho={14}>
+            {isError && data ? 'Reveja os dados enviados' : ''}
+          </Descritivo>
         )}
         {isSuccess && data ? (
           <Botao type="button" onClick={fecharCarrinho}>
