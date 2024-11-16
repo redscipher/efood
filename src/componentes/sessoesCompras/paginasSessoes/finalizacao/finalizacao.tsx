@@ -37,8 +37,8 @@ const Finalizacao = () => {
     // executa acao
     despacho(abrirFechar(false))
     // recarrega pagina
-    window.location.reload()
     navegar('/')
+    window.location.reload()
   }
 
   const efetuarCompra = () => {
