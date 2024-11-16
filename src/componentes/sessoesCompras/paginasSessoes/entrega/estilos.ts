@@ -1,6 +1,6 @@
 // importacoes
 import styled from 'styled-components'
-import { BotaoLink, CORES } from '../../../../globais'
+import { Botao, BotaoLink, CORES } from '../../../../globais'
 
 // estilos
 const EntregaContainer = styled.div`
@@ -13,7 +13,8 @@ const EntregaContainer = styled.div`
   form {
     margin: 8px;
 
-    ${BotaoLink} {
+    ${BotaoLink},
+    ${Botao} {
       margin-left: 0;
       font-weight: bold;
       font-size: 14px;

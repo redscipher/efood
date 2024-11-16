@@ -21,8 +21,12 @@ const initialState: PedidosEstado = {
   idAtual: ''
 }
 
-export const retornaUltimoIdx = () => {
+export const retornaUltimoIdx = (): number => {
   return initialState.itens.length
+}
+
+export const retornaIdxAtual = (id: string): number => {
+  return initialState.itens.findIndex((item) => item.id === id)
 }
 
 // parte

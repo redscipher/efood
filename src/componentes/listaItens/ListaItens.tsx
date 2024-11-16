@@ -138,7 +138,6 @@ const ListaItens = ({ itens, colunas, colunagap, gap, tipo }: Props) => {
               <img src={itemSel.imagem} alt={itemSel.titulo} />
               <div>
                 <h1 className="modal-title fs-5">{itemSel.titulo}</h1>
-                <>{console.log(itemSel.categorias)}</>
                 <p>
                   {itemSel.descricao} <br /> <br />
                   {itemSel.categorias?.join('') !== undefined && (

@@ -12,21 +12,39 @@ import {
 import * as E from './estilos'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+// acoes
+import { adicionarEndereco } from '../../../../armazem/redutores/pedidos'
+import { RootReducer } from '../../../../armazem'
 
 const Entrega = () => {
+  // busca os pedidos
+  const { itens, idAtual } = useSelector(
+    (estado: RootReducer) => estado.pedidos
+  )
+
   // parametros da URL
   const { id } = useParams()
+  // cria o despacho
+  const despacho = useDispatch()
   // cria navegacao
   const navegar = useNavigate()
 
+  // busca o indice do id atual
+  const retornaIdxAtual = () => {
+    return itens.findIndex((item) => item.id === idAtual)
+  }
+
+  const idx = retornaIdxAtual()
+
   const form = useFormik({
     initialValues: {
-      idRecebedor: '',
-      idEndereco: '',
-      idCidade: '',
-      idCEP: '',
-      idNumero: '',
-      idComplemento: ''
+      idRecebedor: itens[idx].delivery?.receiver,
+      idEndereco: itens[idx].delivery?.address.description,
+      idCidade: itens[idx].delivery?.address.city,
+      idCEP: itens[idx].delivery?.address.zipCode,
+      idNumero: itens[idx].delivery?.address.number,
+      idComplemento: itens[idx].delivery?.address.complement
     },
     validationSchema: Yup.object({
       idRecebedor: Yup.string().required('O campo é obrigatorio'),
@@ -36,7 +54,19 @@ const Entrega = () => {
       idNumero: Yup.string().required('O campo é obrigatorio')
     }),
     onSubmit: (valores) => {
-      console.log(valores)
+      // executa atualizacao dos valores
+      despacho(
+        adicionarEndereco({
+          receiver: valores.idRecebedor as string,
+          address: {
+            city: valores.idCidade as string,
+            complement: valores.idComplemento as string,
+            description: valores.idEndereco as string,
+            number: valores.idNumero as unknown as number,
+            zipCode: valores.idCEP as string
+          }
+        })
+      )
       // passa p/ proxima rota
       navegar(`/restaurante/${id}/pagamento`)
     }
@@ -70,6 +100,7 @@ const Entrega = () => {
           <Campos
             type="text"
             id="idRecebedor"
+            value={itens[idx].delivery?.receiver}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
             required
@@ -82,6 +113,7 @@ const Entrega = () => {
           <Campos
             type="text"
             id="idEndereco"
+            value={itens[idx].delivery?.address.description}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
             required
@@ -94,6 +126,7 @@ const Entrega = () => {
           <Campos
             type="text"
             id="idCidade"
+            value={itens[idx].delivery?.address.city}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
             required
@@ -106,6 +139,7 @@ const Entrega = () => {
               <Campos
                 type="text"
                 id="idCEP"
+                value={itens[idx].delivery?.address.zipCode}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 required
@@ -118,6 +152,7 @@ const Entrega = () => {
               <Campos
                 type="text"
                 id="idNumero"
+                value={itens[idx].delivery?.address.number}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 required
@@ -132,6 +167,7 @@ const Entrega = () => {
           <Campos
             type="text"
             id="idComplemento"
+            value={itens[idx].delivery?.address.complement}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
           />
