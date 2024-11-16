@@ -32,13 +32,14 @@ const Finalizacao = () => {
   const fecharCarrinho = () => {
     // executa acao
     despacho(abrirFechar(false))
+    // recarrega pagina
+    window.location.reload()
   }
 
   const efetuarCompra = () => {
     // efetua o 'POST' do pedido carregado
     comprar(itens[idx])
     setFlgConfirmarPedido(!flgConfirmarPedido)
-    console.log(flgConfirmarPedido)
   }
 
   useEffect(() => {
