@@ -7,17 +7,11 @@ import { abrirFechar } from '../../armazem/redutores/carrinho'
 import RotasSessoes from './paginasSessoes/rotasSessoes'
 // estilos
 import CarrinhoCaixa, { CarrinhoOpaco, Sessoes } from './estilos'
-import { useNavigate } from 'react-router-dom'
 
 // componente
 const SessoesCompras = () => {
   // itens do carrinho + controle se esta aberto
-  const { estaAberto, itens } = useSelector(
-    (estado: RootReducer) => estado.carrinho
-  )
-
-  // navegacao
-  const navegar = useNavigate()
+  const { estaAberto } = useSelector((estado: RootReducer) => estado.carrinho)
 
   // despacho de acoes p/ armazem
   const despacho = useDispatch()
