@@ -87,6 +87,7 @@ type Pedido = {
   products?: ItemCardapio[]
   delivery?: DadosEndereco
   payment?: DadosPagamento
+  confirmado?: boolean
 }
 
 // estilos

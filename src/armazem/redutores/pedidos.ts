@@ -37,8 +37,9 @@ const pedidoParte = createSlice({
       const idx = retornaUltimoIdx()
       // adiciona endereco
       estado.itens[idx].id = acao.payload
+      estado.itens[idx].confirmado = true
       estado.idAtual = ''
-      alert('Pedido confirmado!')
+      alert('Pedido confirmado - ' + acao.payload + ' !')
     },
     adicionarItens: (estado, acao: PayloadAction<ItemCardapio[]>) => {
       // validacao

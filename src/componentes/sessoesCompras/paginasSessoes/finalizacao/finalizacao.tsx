@@ -6,6 +6,7 @@ import { abrirFechar, esvaziar } from '../../../../armazem/redutores/carrinho'
 import { confirmarPedido } from '../../../../armazem/redutores/pedidos'
 import { useComprarMutation } from '../../../../servicos/api'
 import { RootReducer } from '../../../../armazem'
+import { useEffect } from 'react'
 
 const Finalizacao = () => {
   const { itens, idAtual } = useSelector(
@@ -15,7 +16,7 @@ const Finalizacao = () => {
   const despacho = useDispatch()
 
   // constante com funcao 'POST' p/ compra
-  const [comprar, { data, isSuccess }] = useComprarMutation()
+  const [comprar, { data, isSuccess, error }] = useComprarMutation()
 
   // funcoes
   // busca o indice do id atual
@@ -30,25 +31,40 @@ const Finalizacao = () => {
     despacho(abrirFechar(false))
   }
 
-  const finalizarPedido = () => {
+  const efetuarCompra = () => {
     // efetua o 'POST' do pedido carregado
-    comprar(itens[idx])
-    // confirma o pedido com o novo ID
-    despacho(confirmarPedido(itens[idx].id as string))
-    // esvazia + fecha modal
-    despacho(esvaziar())
+    if (idx !== -1) {
+      comprar(itens[idx])
+    } else {
+      console.error('Pedido atual não encontrado')
+    }
+  }
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      // confirma o pedido com o novo ID
+      despacho(confirmarPedido(data.orderId))
+      // esvazia + fecha modal
+      despacho(esvaziar())
+    }
+  }, [data, despacho, isSuccess])
+
+  if (error) {
+    console.error('Erro ao comprar:', error)
   }
 
   // def retorno
   return (
     <E.default>
-      {isSuccess ? (
-        <Titulo>Pedido realizado - {data.orderId}</Titulo>
+      {isSuccess && data ? (
+        <>
+          <Titulo>Pedido realizado - {data.orderId}</Titulo>
+        </>
       ) : (
         <Titulo>Pedido - 0000000</Titulo>
       )}
       <div>
-        {isSuccess ? (
+        {isSuccess && data ? (
           <Descritivo tamanho={14}>
             Estamos felizes em informar que seu pedido já está em processo de
             preparação e, em breve, será entregue no endereço fornecido. <br />
@@ -66,12 +82,12 @@ const Finalizacao = () => {
         ) : (
           <Descritivo tamanho={14}></Descritivo>
         )}
-        {isSuccess ? (
+        {isSuccess && data ? (
           <Botao type="button" onClick={fecharCarrinho}>
             Fechar
           </Botao>
         ) : (
-          <Botao type="button" onClick={finalizarPedido}>
+          <Botao type="button" onClick={efetuarCompra}>
             Concluir
           </Botao>
         )}
