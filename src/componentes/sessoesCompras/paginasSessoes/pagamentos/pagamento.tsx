@@ -1,6 +1,7 @@
 // importacoes
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
+  Botao,
   BotaoLink,
   Campos,
   EntradaMeia,
@@ -11,15 +12,72 @@ import {
 } from '../../../../globais'
 
 import * as E from './estilos'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../../../armazem'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { adicionarPagamento } from '../../../../armazem/redutores/pedidos'
 
 const Pagamento = () => {
   // parametros da URL
   const { id } = useParams()
+  // navegacao
+  const navegar = useNavigate()
+  // despacho
+  const despacho = useDispatch()
 
   // itens do carrinho + controle se esta aberto
   const { itens } = useSelector((estado: RootReducer) => estado.carrinho)
+  // busca os pedidos
+  const { itens: itensPedidos, idAtual } = useSelector(
+    (estado: RootReducer) => estado.pedidos
+  )
+
+  // busca o indice do id atual
+  const retornaIdxAtual = () => {
+    return itensPedidos.findIndex((item) => item.id === idAtual)
+  }
+
+  const idx = retornaIdxAtual()
+
+  const form = useFormik({
+    initialValues: {
+      idNomeCartao: itensPedidos[idx].payment?.card.name,
+      idNumCartao: itensPedidos[idx].payment?.card.number,
+      idCVV: itensPedidos[idx].payment?.card.code,
+      idMesVenc: itensPedidos[idx].payment?.card.expires.month,
+      idAnoVenc: itensPedidos[idx].payment?.card.expires.year
+    },
+    validationSchema: Yup.object({
+      idNomeCartao: Yup.string().required('O campo é obrigatorio'),
+      idNumCartao: Yup.number().required('O campo é obrigatorio'),
+      idCVV: Yup.number().required('O campo é obrigatorio'),
+      idMesVenc: Yup.number().required('O campo é obrigatorio'),
+      idAnoVenc: Yup.number().required('O campo é obrigatorio')
+    }),
+    onSubmit: (valores) => {
+      // executa envio
+      despacho(
+        adicionarPagamento({
+          card: {
+            code: valores.idCVV as number,
+            expires: {
+              month: valores.idMesVenc as number,
+              year: valores.idAnoVenc as number
+            },
+            name: valores.idNomeCartao as string,
+            number: valores.idNumCartao as unknown as string
+          }
+        })
+      )
+      // passa p/ proxima rota
+      navegar(`/restaurante/${id}/finalizar`)
+    }
+  })
+
+  const validaProximaRota = () => {
+    form.submitForm() // valida e submete o formulário
+  }
 
   // funcoes
   const retornaValorTotal = (): string => {
@@ -36,26 +94,67 @@ const Pagamento = () => {
     return formataNumero(valorTotal)
   }
 
+  const retornaMensagemErro = (campo: string, message?: string): string => {
+    // variavel retorno
+    let str: string = ''
+    // verifica se o campo ja foi passado pelo usuario
+    const estaAlterado = campo in form.touched
+    // verifica se o campo esta invalido
+    const estaInvalido = campo in form.errors
+    // caso o campo ja foi passado e esta invalido, exibe mensagem de erro
+    if (estaAlterado && estaInvalido) str = message!
+    // def retorno
+    return str
+  }
+
   // def retorno
   return (
     <E.default>
       <Titulo>Pagamento - Valor a pagar {retornaValorTotal()}</Titulo>
-      <form action="">
+      <form action="" onSubmit={form.handleSubmit}>
         <Entradas>
           {/* entrada 1 */}
           <Rotulos htmlFor="">Nome no cartão</Rotulos>
-          <Campos type="text" required />
+          <Campos
+            type="text"
+            id="idNomeCartao"
+            value={itensPedidos[idx].payment?.card.name}
+            onChange={form.handleChange}
+            onBlur={form.handleBlur}
+            required
+          />
+          <small>
+            {retornaMensagemErro('idNomeCartao', form.errors.idNomeCartao)}
+          </small>
           {/* --------------------------------------- */}
           <EntradaMeia>
             {/* entrada 2 */}
             <div>
               <Rotulos htmlFor="">Número do cartão</Rotulos>
-              <Campos type="number" required />
+              <Campos
+                type="number"
+                id="idNumCartao"
+                value={itensPedidos[idx].payment?.card.number}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+                required
+              />
+              <small>
+                {retornaMensagemErro('idNumCartao', form.errors.idNumCartao)}
+              </small>
             </div>
             {/* entrada 3 */}
             <div>
               <Rotulos htmlFor="">CVV</Rotulos>
-              <Campos type="number" required />
+              <Campos
+                type="number"
+                id="idCVV"
+                value={itensPedidos[idx].payment?.card.code}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+                required
+              />
+              <small>{retornaMensagemErro('idCVV', form.errors.idCVV)}</small>
             </div>
           </EntradaMeia>
           {/* --------------------------------------- */}
@@ -63,20 +162,40 @@ const Pagamento = () => {
             {/* entrada 4 */}
             <div>
               <Rotulos htmlFor="">Mes do vencimento</Rotulos>
-              <Campos type="number" required />
+              <Campos
+                type="number"
+                id="idMesVenc"
+                value={itensPedidos[idx].payment?.card.expires.month}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+                required
+              />
+              <small>
+                {retornaMensagemErro('idMesVenc', form.errors.idMesVenc)}
+              </small>
             </div>
             {/* entrada 5 */}
             <div>
               <Rotulos htmlFor="">Ano do vencimento</Rotulos>
-              <Campos type="number" required />
+              <Campos
+                type="number"
+                id="idAnoVenc"
+                value={itensPedidos[idx].payment?.card.expires.year}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+                required
+              />
+              <small>
+                {retornaMensagemErro('idAnoVenc', form.errors.idAnoVenc)}
+              </small>
             </div>
           </EntradaMeia>
         </Entradas>
         {/* botoes */}
         <div>
-          <BotaoLink to={`/restaurante/${id}/finalizar`} type="button">
+          <Botao type="button" onClick={validaProximaRota}>
             Finalizar pagamento
-          </BotaoLink>
+          </Botao>
           <BotaoLink to={`/restaurante/${id}/entrega`} type="button">
             Voltar para a edição de endereço
           </BotaoLink>
