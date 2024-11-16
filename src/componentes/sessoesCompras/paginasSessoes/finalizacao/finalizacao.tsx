@@ -7,6 +7,7 @@ import { confirmarPedido } from '../../../../armazem/redutores/pedidos'
 import { useComprarMutation } from '../../../../servicos/api'
 import { RootReducer } from '../../../../armazem'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Finalizacao = () => {
   const { itens, idAtual } = useSelector(
@@ -14,6 +15,9 @@ const Finalizacao = () => {
   )
   // despacho de acoes p/ armazem
   const despacho = useDispatch()
+
+  // navegacao
+  const navegar = useNavigate()
 
   // estado
   const [flgConfirmarPedido, setFlgConfirmarPedido] = useState(false)
@@ -33,7 +37,7 @@ const Finalizacao = () => {
     // executa acao
     despacho(abrirFechar(false))
     // recarrega pagina
-    window.location.reload()
+    navegar('/')
   }
 
   const efetuarCompra = () => {

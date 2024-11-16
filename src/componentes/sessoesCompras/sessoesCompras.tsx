@@ -7,29 +7,25 @@ import { abrirFechar } from '../../armazem/redutores/carrinho'
 import RotasSessoes from './paginasSessoes/rotasSessoes'
 // estilos
 import CarrinhoCaixa, { CarrinhoOpaco, Sessoes } from './estilos'
-import { retornaUltimoIdx } from '../../armazem/redutores/pedidos'
+import { useNavigate } from 'react-router-dom'
 
 // componente
 const SessoesCompras = () => {
   // itens do carrinho + controle se esta aberto
-  const { estaAberto } = useSelector((estado: RootReducer) => estado.carrinho)
-  const { itens: itensPedido } = useSelector(
-    (estado: RootReducer) => estado.pedidos
+  const { estaAberto, itens } = useSelector(
+    (estado: RootReducer) => estado.carrinho
   )
+
+  // navegacao
+  const navegar = useNavigate()
 
   // despacho de acoes p/ armazem
   const despacho = useDispatch()
-
-  const idx = retornaUltimoIdx()
 
   // funcoes
   const fecharCarrinho = () => {
     // executa acao
     despacho(abrirFechar(!estaAberto))
-    // validacao p/ recarregar a pagina
-    if (itensPedido[idx].confirmado) {
-      window.location.reload()
-    }
   }
 
   // def retorno
