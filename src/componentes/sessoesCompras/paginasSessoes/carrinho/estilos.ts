@@ -22,6 +22,12 @@ const CarrinhoContainer = styled.aside`
     margin: 0 8px 0 8px;
     /* largura */
     width: 344px;
+    /* escondido de inicio */
+    pointer-events: none;
+
+    &.visivel {
+      pointer-events: all;
+    }
   }
 
   /* smartphones */

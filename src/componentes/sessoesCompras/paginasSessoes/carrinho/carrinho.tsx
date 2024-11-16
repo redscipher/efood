@@ -113,8 +113,11 @@ const Carrinho = () => {
           to={`/restaurante/${id}/entrega`}
           onClick={adicionarItensPedido}
           type="button"
+          className={itens.length > 0 ? 'visivel' : ''}
         >
-          Continuar com a entrega
+          {itens.length > 0
+            ? 'Continuar com a entrega'
+            : 'Adicione itens antes de continuar com a entrega'}
         </BotaoLink>
       </div>
     </E.default>
