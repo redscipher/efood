@@ -107,6 +107,7 @@ const Entrega = () => {
   }
 
   if (itensCarrinho.length === 0) {
+    alert('nao possui itens no carrinho')
     return <Navigate to={'/'} />
   }
 
