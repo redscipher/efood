@@ -1,5 +1,5 @@
 // importacoes
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   Botao,
   BotaoLink,
@@ -106,8 +106,12 @@ const Entrega = () => {
     form.submitForm() // valida e submete o formulário
   }
 
+  const retornaAbaInicial = () => {
+    navegar(`/restaurante/${id}/carrinho`)
+  }
+
   if (itensCarrinho.length === 0) {
-    return <Navigate to={'/'} />
+    return <>{retornaAbaInicial()}</>
   }
 
   // def retorno
