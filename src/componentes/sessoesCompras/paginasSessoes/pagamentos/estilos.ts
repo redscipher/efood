@@ -15,6 +15,7 @@ const PagamentoContainer = styled.div`
 
     small {
       color: ${CORES.vermelho};
+      font-size: 8px;
     }
 
     ${BotaoLink},
@@ -27,9 +28,34 @@ const PagamentoContainer = styled.div`
 
     ${EntradaMeia} {
       margin-bottom: 16px;
+
+      /* smartphones */
+      @media screen and (max-width: 767px) {
+        div {
+          width: 45%;
+        }
+      }
+    }
+  }
+`
+
+const EntradaMeiaEspec = styled(EntradaMeia)`
+  div {
+    width: 87px;
+  }
+
+  #idCamposMaiores {
+    width: 228px;
+  }
+
+  /* smartphones */
+  @media screen and (max-width: 767px) {
+    #idCamposMaiores {
+      width: 50%;
     }
   }
 `
 
 // exportacoes
 export default PagamentoContainer
+export { EntradaMeiaEspec }

@@ -141,9 +141,9 @@ const Pagamento = () => {
             {retornaMensagemErro('idNomeCartao', form.errors.idNomeCartao)}
           </small>
           {/* --------------------------------------- */}
-          <EntradaMeia>
+          <E.EntradaMeiaEspec>
             {/* entrada 2 */}
-            <div>
+            <div id="idCamposMaiores">
               <Rotulos htmlFor="">Número do cartão</Rotulos>
               <Campos
                 type="number"
@@ -172,7 +172,7 @@ const Pagamento = () => {
               />
               <small>{retornaMensagemErro('idCVV', form.errors.idCVV)}</small>
             </div>
-          </EntradaMeia>
+          </E.EntradaMeiaEspec>
           {/* --------------------------------------- */}
           <EntradaMeia>
             {/* entrada 4 */}

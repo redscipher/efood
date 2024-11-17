@@ -23,6 +23,7 @@ const EntregaContainer = styled.div`
 
     small {
       color: ${CORES.vermelho};
+      font-size: 8px;
     }
 
     #idUltEntrada {
