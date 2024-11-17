@@ -1,5 +1,5 @@
 // importacoes
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import {
   Botao,
   BotaoLink,
@@ -21,6 +21,10 @@ const Entrega = () => {
   // busca os pedidos
   const { itens, idAtual } = useSelector(
     (estado: RootReducer) => estado.pedidos
+  )
+
+  const { itens: itensCarrinho } = useSelector(
+    (estado: RootReducer) => estado.carrinho
   )
 
   // parametros da URL
@@ -85,8 +89,25 @@ const Entrega = () => {
     return str
   }
 
+  const validaErro = (campo: string): boolean => {
+    // variavel retorno
+    let controle: boolean = false
+    // verifica se o campo ja foi passado pelo usuario
+    const estaAlterado = campo in form.touched
+    // verifica se o campo esta invalido
+    const estaInvalido = campo in form.errors
+    // caso o campo ja foi passado e esta invalido, adiciona classe de erro
+    controle = estaAlterado && estaInvalido
+    // def retorno
+    return controle
+  }
+
   const validaProximaRota = () => {
     form.submitForm() // valida e submete o formulário
+  }
+
+  if (itensCarrinho.length === 0) {
+    return <Navigate to={'/'} />
   }
 
   // def retorno
@@ -103,6 +124,7 @@ const Entrega = () => {
             value={itens[idx].delivery?.receiver}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            className={validaErro('idRecebedor') ? 'erro' : ''}
             required
           />
           <small>
@@ -116,6 +138,7 @@ const Entrega = () => {
             value={itens[idx].delivery?.address.description}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            className={validaErro('idEndereco') ? 'erro' : ''}
             required
           />
           <small>
@@ -129,6 +152,7 @@ const Entrega = () => {
             value={itens[idx].delivery?.address.city}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            className={validaErro('idCidade') ? 'erro' : ''}
             required
           />
           <small>{retornaMensagemErro('idCidade', form.errors.idCidade)}</small>
@@ -142,6 +166,7 @@ const Entrega = () => {
                 value={itens[idx].delivery?.address.zipCode}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={validaErro('idCEP') ? 'erro' : ''}
                 required
               />
               <small>{retornaMensagemErro('idCEP', form.errors.idCEP)}</small>
@@ -155,6 +180,7 @@ const Entrega = () => {
                 value={itens[idx].delivery?.address.number}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={validaErro('idNumero') ? 'erro' : ''}
                 required
               />
               <small>

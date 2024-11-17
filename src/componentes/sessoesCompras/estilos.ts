@@ -42,6 +42,14 @@ const Sessoes = styled.div`
   /* exibe scrolls */
   overflow-y: auto;
 
+  input,
+  select {
+    /* classes */
+    &.erro {
+      border: 2px solid ${CORES.vermelho};
+    }
+  }
+
   &::-webkit-scrollbar {
     width: 1px;
   }

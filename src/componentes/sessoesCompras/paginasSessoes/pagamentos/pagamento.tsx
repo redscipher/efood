@@ -107,6 +107,19 @@ const Pagamento = () => {
     return str
   }
 
+  const validaErro = (campo: string): boolean => {
+    // variavel retorno
+    let controle: boolean = false
+    // verifica se o campo ja foi passado pelo usuario
+    const estaAlterado = campo in form.touched
+    // verifica se o campo esta invalido
+    const estaInvalido = campo in form.errors
+    // caso o campo ja foi passado e esta invalido, adiciona classe de erro
+    controle = estaAlterado && estaInvalido
+    // def retorno
+    return controle
+  }
+
   // def retorno
   return (
     <E.default>
@@ -121,6 +134,7 @@ const Pagamento = () => {
             value={itensPedidos[idx].payment?.card.name}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            className={validaErro('idNomeCartao') ? 'erro' : ''}
             required
           />
           <small>
@@ -137,6 +151,7 @@ const Pagamento = () => {
                 value={itensPedidos[idx].payment?.card.number}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={validaErro('idNumCartao') ? 'erro' : ''}
                 required
               />
               <small>
@@ -152,6 +167,7 @@ const Pagamento = () => {
                 value={itensPedidos[idx].payment?.card.code}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={validaErro('idCVV') ? 'erro' : ''}
                 required
               />
               <small>{retornaMensagemErro('idCVV', form.errors.idCVV)}</small>
@@ -168,6 +184,7 @@ const Pagamento = () => {
                 value={itensPedidos[idx].payment?.card.expires.month}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={validaErro('idMesVenc') ? 'erro' : ''}
                 required
               />
               <small>
@@ -183,6 +200,7 @@ const Pagamento = () => {
                 value={itensPedidos[idx].payment?.card.expires.year}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
+                className={validaErro('idAnoVenc') ? 'erro' : ''}
                 required
               />
               <small>
