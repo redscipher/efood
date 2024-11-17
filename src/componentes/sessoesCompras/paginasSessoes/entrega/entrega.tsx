@@ -126,6 +126,7 @@ const Entrega = () => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
             className={validaErro('idRecebedor') ? 'erro' : ''}
+            mask={''}
             required
           />
           <small>
@@ -140,6 +141,7 @@ const Entrega = () => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
             className={validaErro('idEndereco') ? 'erro' : ''}
+            mask={''}
             required
           />
           <small>
@@ -154,6 +156,7 @@ const Entrega = () => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
             className={validaErro('idCidade') ? 'erro' : ''}
+            mask={''}
             required
           />
           <small>{retornaMensagemErro('idCidade', form.errors.idCidade)}</small>
@@ -168,6 +171,7 @@ const Entrega = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={validaErro('idCEP') ? 'erro' : ''}
+                mask={'99.999-999'}
                 required
               />
               <small>{retornaMensagemErro('idCEP', form.errors.idCEP)}</small>
@@ -182,6 +186,7 @@ const Entrega = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={validaErro('idNumero') ? 'erro' : ''}
+                mask={''}
                 required
               />
               <small>
@@ -197,6 +202,7 @@ const Entrega = () => {
             value={itens[idx].delivery?.address.complement}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            mask={''}
           />
         </Entradas>
         {/* botoes */}

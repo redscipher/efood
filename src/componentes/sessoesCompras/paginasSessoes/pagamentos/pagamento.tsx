@@ -135,6 +135,7 @@ const Pagamento = () => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
             className={validaErro('idNomeCartao') ? 'erro' : ''}
+            mask={''}
             required
           />
           <small>
@@ -152,6 +153,7 @@ const Pagamento = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={validaErro('idNumCartao') ? 'erro' : ''}
+                mask={''}
                 required
               />
               <small>
@@ -168,6 +170,7 @@ const Pagamento = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={validaErro('idCVV') ? 'erro' : ''}
+                mask={''}
                 required
               />
               <small>{retornaMensagemErro('idCVV', form.errors.idCVV)}</small>
@@ -185,6 +188,7 @@ const Pagamento = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={validaErro('idMesVenc') ? 'erro' : ''}
+                mask={''}
                 required
               />
               <small>
@@ -201,6 +205,7 @@ const Pagamento = () => {
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
                 className={validaErro('idAnoVenc') ? 'erro' : ''}
+                mask={''}
                 required
               />
               <small>

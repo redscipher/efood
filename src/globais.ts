@@ -1,4 +1,5 @@
 // importacoes
+import ReactInputMask from 'react-input-mask'
 import { Link } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
@@ -223,7 +224,7 @@ const Rotulos = styled.label`
   margin-bottom: 8px;
 `
 
-const Campos = styled.input`
+const Campos = styled(ReactInputMask)`
   font-size: 14px;
   line-height: 16px;
   font-weight: 700;
