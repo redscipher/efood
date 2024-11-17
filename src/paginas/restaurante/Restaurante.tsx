@@ -6,6 +6,7 @@ import Cabecalho from '../../componentes/cabecalho'
 import HeroiFundo from '../../ativos/imagens/restaurantes/restaurante2.png'
 import { useParams } from 'react-router-dom'
 import { useGetCardapioQuery } from '../../servicos/api'
+import Carregador from '../../componentes/carregador/carregador'
 
 // componente
 const Restaurante = () => {
@@ -16,7 +17,7 @@ const Restaurante = () => {
 
   // validacao
   if (!lstCardapio) {
-    return <h3>Carregando...</h3>
+    return <Carregador />
   } else {
     // def retorno
     return (

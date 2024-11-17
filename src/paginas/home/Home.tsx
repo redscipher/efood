@@ -1,6 +1,7 @@
 // importacoes
 import Heroi from '../../componentes/heroi/Heroi'
 import ListaItens from '../../componentes/listaItens/ListaItens'
+import Carregador from '../../componentes/carregador/carregador'
 // imagens
 import HeroiFundo from '../../ativos/imagens/fundo_heroi.png'
 import { useGetRestaurantesQuery } from '../../servicos/api'
@@ -12,7 +13,7 @@ const Home = () => {
 
   // validacao
   if (!lstRestaurantes) {
-    return <h3>Carregando...</h3>
+    return <Carregador />
   } else {
     // def retorno
     return (
